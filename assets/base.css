@@ -204,13 +204,15 @@ h1, .h1 { text-transform: none; }
   white-space: nowrap;
   border: 0;
 }
-.skip-link {
+/* Lien d'évitement : hors du flux, visible uniquement au focus clavier.
+   Spécificité renforcée car .button (déclaré plus loin) impose position: relative. */
+.skip-link.button {
   position: absolute;
   top: -100px;
   left: var(--space-md);
   z-index: 1000;
 }
-.skip-link:focus { top: var(--space-md); }
+.skip-link.button:focus { top: var(--space-md); }
 
 /* 4. Mise en page --------------------------------------------------------- */
 .page-width {
