@@ -151,13 +151,29 @@
       "id": "mode",
       "label": "Type de formulaire",
       "options": [
-        { "value": "standard", "label": "Contact" },
-        { "value": "business", "label": "Demande professionnelle (cadeaux d'entreprise)" }
+        {
+          "value": "standard",
+          "label": "Contact"
+        },
+        {
+          "value": "business",
+          "label": "Demande professionnelle (cadeaux d'entreprise)"
+        }
       ],
       "default": "standard"
     },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Écrivez-nous" },
-    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Une question sur un produit ou une commande ? Remplissez le formulaire, nous vous répondrons par e-mail.</p>" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Écrivez-nous"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Une question sur un produit ou une commande ? Remplissez le formulaire, nous vous répondrons par e-mail.</p>"
+    },
     {
       "type": "textarea",
       "id": "subjects",
@@ -165,25 +181,77 @@
       "info": "Un sujet par ligne. Laissez vide pour un champ libre.",
       "default": "Question sur un produit\nSuivi de ma commande\nRetour ou échange\nAutre demande"
     },
-    { "type": "checkbox", "id": "show_info", "label": "Afficher les coordonnées", "info": "Coordonnées renseignées dans Réglages du thème > Coordonnées.", "default": true },
-    { "type": "text", "id": "info_heading", "label": "Titre des coordonnées", "default": "Nous joindre" },
-    { "type": "richtext", "id": "info_text", "label": "Texte des coordonnées" },
+    {
+      "type": "checkbox",
+      "id": "show_info",
+      "label": "Afficher les coordonnées",
+      "info": "Coordonnées renseignées dans Réglages du thème > Coordonnées.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "info_heading",
+      "label": "Titre des coordonnées",
+      "default": "Nous joindre"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text",
+      "label": "Texte des coordonnées"
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 88 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 88
+    }
   ],
   "presets": [
-    { "name": "Formulaire de contact" },
+    {
+      "name": "Formulaire de contact"
+    },
     {
       "name": "Demande professionnelle",
       "settings": {

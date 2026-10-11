@@ -25,18 +25,26 @@
             endif
             case b.background
               when 'sage'
-                assign tile_bg = 'var(--color-sage)'
+                assign tile_bg = 'var(--color-green)'
+                assign tile_scheme = 'scheme-sage'
               when 'sage-light'
-                assign tile_bg = 'var(--color-sage-light)'
+                assign tile_bg = 'var(--color-green-light)'
+                assign tile_scheme = ''
               when 'ivory'
-                assign tile_bg = 'var(--color-ivory)'
+                assign tile_bg = 'var(--color-gray)'
+                assign tile_scheme = ''
               when 'gold'
-                assign tile_bg = 'color-mix(in srgb, var(--color-gold) 22%, var(--color-offwhite))'
+                assign tile_bg = 'var(--color-yellow)'
+                assign tile_scheme = 'scheme-yellow'
+              when 'red'
+                assign tile_bg = 'var(--color-red)'
+                assign tile_scheme = 'scheme-red'
               else
-                assign tile_bg = 'var(--color-offwhite)'
+                assign tile_bg = 'var(--color-bg)'
+                assign tile_scheme = ''
             endcase
           -%}
-          <{{ tile_tag }}{% if b.link != blank %} href="{{ b.link }}"{% endif %} class="tile{% if b.image != blank or b.show_placeholder %} tile--image{% endif %}" style="--tile-bg: {{ tile_bg }};" {{ block.shopify_attributes }}>
+          <{{ tile_tag }}{% if b.link != blank %} href="{{ b.link }}"{% endif %} class="tile {{ tile_scheme }}{% if b.image != blank or b.show_placeholder %} tile--image{% endif %}" style="--tile-bg: {{ tile_bg }};" {{ block.shopify_attributes }}>
             {%- if b.image != blank -%}
               <div class="tile__img">
                 {% render 'responsive-image', image: b.image, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400,600,800,1000,1300' %}
@@ -72,16 +80,36 @@
       "type": "paragraph",
       "content": "Mettez en avant Noël, la rentrée, les idées cadeaux ou un événement. Masquez la section quand elle n'est plus d'actualité."
     },
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "En ce moment" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Les sélections <em>de saison</em>" },
-    { "type": "richtext", "id": "text", "label": "Texte" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "En ce moment"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Les sélections <em>de saison</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte"
+    },
     {
       "type": "select",
       "id": "heading_align",
       "label": "Alignement du titre",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Centré" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centré"
+        }
       ],
       "default": "left"
     },
@@ -90,8 +118,14 @@
       "id": "layout",
       "label": "Disposition (3 tuiles)",
       "options": [
-        { "value": "feature", "label": "Une grande tuile et deux petites" },
-        { "value": "columns", "label": "Colonnes égales" }
+        {
+          "value": "feature",
+          "label": "Une grande tuile et deux petites"
+        },
+        {
+          "value": "columns",
+          "label": "Colonnes égales"
+        }
       ],
       "default": "feature"
     },
@@ -100,41 +134,126 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "tile",
       "name": "Tuile",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image (facultative)" },
-        { "type": "checkbox", "id": "show_placeholder", "label": "Image d'exemple tant qu'aucune image n'est choisie", "default": true },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (facultative)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_placeholder",
+          "label": "Image d'exemple tant qu'aucune image n'est choisie",
+          "default": true
+        },
         {
           "type": "select",
           "id": "background",
           "label": "Fond sans image",
           "options": [
-            { "value": "sage-light", "label": "Vert sauge très clair" },
-            { "value": "sage", "label": "Vert sauge" },
-            { "value": "ivory", "label": "Beige ivoire" },
-            { "value": "gold", "label": "Or doux léger" },
-            { "value": "offwhite", "label": "Blanc cassé" }
+            {
+              "value": "sage-light",
+              "label": "Vert clair"
+            },
+            {
+              "value": "sage",
+              "label": "Vert"
+            },
+            {
+              "value": "ivory",
+              "label": "Gris clair"
+            },
+            {
+              "value": "gold",
+              "label": "Jaune"
+            },
+            {
+              "value": "offwhite",
+              "label": "Blanc"
+            }
           ],
           "default": "sage-light"
         },
-        { "type": "text", "id": "label", "label": "Étiquette", "default": "Idées cadeaux" },
-        { "type": "text", "id": "title", "label": "Titre", "default": "Faites-vous plaisir sans vous ruiner" },
-        { "type": "text", "id": "text", "label": "Texte" },
-        { "type": "text", "id": "cta", "label": "Libellé du lien", "default": "Découvrir" },
-        { "type": "url", "id": "link", "label": "Lien" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Étiquette",
+          "default": "Idées cadeaux"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Faites-vous plaisir sans vous ruiner"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "Libellé du lien",
+          "default": "Découvrir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Lien"
+        }
       ]
     }
   ],
@@ -142,9 +261,30 @@
     {
       "name": "Sélection saisonnière",
       "blocks": [
-        { "type": "tile", "settings": { "label": "Idées cadeaux", "title": "Faites-vous plaisir sans vous ruiner", "background": "sage-light" } },
-        { "type": "tile", "settings": { "label": "Maison", "title": "De belles découvertes, de petits prix", "background": "ivory" } },
-        { "type": "tile", "settings": { "label": "Saison", "title": "Les pépites du moment", "background": "gold" } }
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Idées cadeaux",
+            "title": "Faites-vous plaisir sans vous ruiner",
+            "background": "sage-light"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Maison",
+            "title": "De belles découvertes, de petits prix",
+            "background": "ivory"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Saison",
+            "title": "Les pépites du moment",
+            "background": "gold"
+          }
+        }
       ]
     }
   ]

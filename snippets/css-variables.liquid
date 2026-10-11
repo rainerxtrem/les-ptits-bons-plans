@@ -10,20 +10,6 @@
     {{ body_bold | font_face: font_display: 'swap' }}
   {%- else -%}
     @font-face {
-      font-family: 'DM Serif Display';
-      src: url('{{ 'dm-serif-display-400.woff2' | asset_url }}') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'DM Serif Display';
-      src: url('{{ 'dm-serif-display-400-italic.woff2' | asset_url }}') format('woff2');
-      font-weight: 400;
-      font-style: italic;
-      font-display: swap;
-    }
-    @font-face {
       font-family: 'Inter';
       src: url('{{ 'inter-variable.woff2' | asset_url }}') format('woff2-variations'), url('{{ 'inter-variable.woff2' | asset_url }}') format('woff2');
       font-weight: 100 900;
@@ -33,23 +19,21 @@
   {%- endif -%}
 
   :root {
-    --color-sage: {{ settings.color_sage }};
-    --color-sage-dark: {{ settings.color_sage_dark }};
-    --color-sage-light: {{ settings.color_sage_light }};
-    --color-gold: {{ settings.color_gold }};
-    --color-gold-text: {{ settings.color_gold_text }};
-    --color-ivory: {{ settings.color_ivory }};
-    --color-offwhite: {{ settings.color_offwhite }};
+    --color-green: {{ settings.color_green }};
+    --color-green-dark: {{ settings.color_green_dark }};
+    --color-green-light: {{ settings.color_green_light }};
+    --color-yellow: {{ settings.color_yellow }};
+    --color-red: {{ settings.color_red }};
+    --color-bg: {{ settings.color_bg }};
+    --color-gray: {{ settings.color_gray }};
     --color-white: #FFFFFF;
     --color-text: {{ settings.color_text }};
     --color-text-muted: {{ settings.color_text_muted }};
     --color-border: {{ settings.color_border }};
     --color-button: {{ settings.color_button }};
     --color-button-text: {{ settings.color_button_text }};
-    --color-sale: {{ settings.color_sale }};
     --color-success: {{ settings.color_success }};
-    --color-footer: {{ settings.color_footer }};
-    --color-sage-rgb: {{ settings.color_sage.red }}, {{ settings.color_sage.green }}, {{ settings.color_sage.blue }};
+    --color-green-rgb: {{ settings.color_green.red }}, {{ settings.color_green.green }}, {{ settings.color_green.blue }};
     --color-text-rgb: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
 
     {%- if settings.use_custom_fonts %}
@@ -58,8 +42,8 @@
       --font-heading-style: {{ settings.type_heading_font.style }};
       --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
     {%- else %}
-      --font-heading: 'DM Serif Display', Georgia, 'Times New Roman', serif;
-      --font-heading-weight: 400;
+      --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      --font-heading-weight: 800;
       --font-heading-style: normal;
       --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     {%- endif %}

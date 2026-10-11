@@ -10,7 +10,7 @@
 {%- endcomment -%}
 {%- liquid
   if button_label != blank
-    assign label = button_label
+    assign label = button_label | escape
   else
     assign label = 'newsletter.button' | t
   endif
@@ -50,7 +50,7 @@
         placeholder="{{ 'newsletter.placeholder' | t }}"
         {% if form.errors %}aria-invalid="true" aria-describedby="{{ form_id }}-error"{% else %}aria-describedby="{{ form_id }}-consent"{% endif %}
       >
-      <button type="submit" class="button" name="commit">{{ label | escape }}</button>
+      <button type="submit" class="button" name="commit">{{ label }}</button>
     </div>
     <p class="newsletter__consent" id="{{ form_id }}-consent">
       {%- if consent_text != blank -%}

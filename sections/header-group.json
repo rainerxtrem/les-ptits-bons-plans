@@ -9,7 +9,7 @@
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "Les pépites du moment sont arrivées — découvrez la sélection",
+            "text": "Nouveaux bons plans chaque semaine — découvrez les promos du moment",
             "link": "shopify://collections/all"
           }
         }
@@ -18,7 +18,7 @@
         "announcement-1"
       ],
       "settings": {
-        "color_scheme": "sage",
+        "color_scheme": "yellow",
         "autoplay": false,
         "autoplay_speed": 6
       }

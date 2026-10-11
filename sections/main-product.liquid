@@ -145,7 +145,7 @@
                 {% render block %}
 
               {%- when 'vendor' -%}
-                {%- if product.vendor != blank -%}
+                {%- if product.vendor != blank and product.vendor != shop.name -%}
                   <p class="product__vendor" {{ block.shopify_attributes }}>{{ product.vendor | escape }}</p>
                 {%- endif -%}
 
@@ -364,12 +364,34 @@
   "tag": "div",
   "class": "section-main-product",
   "blocks": [
-    { "type": "@app" },
-    { "type": "vendor", "name": "Marque", "limit": 1 },
-    { "type": "title", "name": "Titre", "limit": 1 },
-    { "type": "price", "name": "Prix", "limit": 1 },
-    { "type": "inventory", "name": "Disponibilité", "limit": 1 },
-    { "type": "sku", "name": "Référence", "limit": 1 },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "vendor",
+      "name": "Marque",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Titre",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Prix",
+      "limit": 1
+    },
+    {
+      "type": "inventory",
+      "name": "Disponibilité",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "Référence",
+      "limit": 1
+    },
     {
       "type": "variant_picker",
       "name": "Sélecteur de variantes",
@@ -380,8 +402,14 @@
           "id": "style",
           "label": "Style",
           "options": [
-            { "value": "buttons", "label": "Boutons" },
-            { "value": "dropdown", "label": "Liste déroulante" }
+            {
+              "value": "buttons",
+              "label": "Boutons"
+            },
+            {
+              "value": "dropdown",
+              "label": "Liste déroulante"
+            }
           ],
           "default": "buttons"
         }
@@ -392,7 +420,12 @@
       "name": "Boutons d'achat",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "show_quantity", "label": "Sélecteur de quantité", "default": true },
+        {
+          "type": "checkbox",
+          "id": "show_quantity",
+          "label": "Sélecteur de quantité",
+          "default": true
+        },
         {
           "type": "checkbox",
           "id": "show_dynamic_checkout",
@@ -402,11 +435,22 @@
         }
       ]
     },
-    { "type": "description", "name": "Description", "limit": 1 },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
     {
       "type": "text",
       "name": "Texte",
-      "settings": [{ "type": "richtext", "id": "text", "label": "Texte", "info": "Peut être relié à un métachamp produit (source dynamique)." }]
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "info": "Peut être relié à un métachamp produit (source dynamique)."
+        }
+      ]
     },
     {
       "type": "shipping_note",
@@ -418,9 +462,18 @@
           "id": "icon",
           "label": "Icône",
           "options": [
-            { "value": "truck", "label": "Camion" },
-            { "value": "box", "label": "Colis" },
-            { "value": "map-pin", "label": "Repère" }
+            {
+              "value": "truck",
+              "label": "Camion"
+            },
+            {
+              "value": "box",
+              "label": "Colis"
+            },
+            {
+              "value": "map-pin",
+              "label": "Repère"
+            }
           ],
           "default": "truck"
         },
@@ -431,7 +484,12 @@
           "info": "Indiquez uniquement des délais et conditions réels.",
           "default": "<p>Les modes et frais de livraison disponibles sont affichés à l'étape du paiement.</p>"
         },
-        { "type": "checkbox", "id": "show_policy_link", "label": "Lien vers la politique d'expédition", "default": true }
+        {
+          "type": "checkbox",
+          "id": "show_policy_link",
+          "label": "Lien vers la politique d'expédition",
+          "default": true
+        }
       ]
     },
     {
@@ -439,28 +497,67 @@
       "name": "Description (accordéon)",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Description détaillée" },
-        { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Description détaillée"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Ouvert par défaut",
+          "default": true
+        }
       ]
     },
     {
       "type": "collapsible_tab",
       "name": "Accordéon",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Caractéristiques" },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Caractéristiques"
+        },
         {
           "type": "select",
           "id": "icon",
           "label": "Icône",
           "options": [
-            { "value": "none", "label": "Aucune" },
-            { "value": "box", "label": "Colis" },
-            { "value": "truck", "label": "Camion" },
-            { "value": "return", "label": "Retour" },
-            { "value": "leaf", "label": "Feuille" },
-            { "value": "sparkle", "label": "Étincelle" },
-            { "value": "chat", "label": "Bulle" },
-            { "value": "tag", "label": "Étiquette" }
+            {
+              "value": "none",
+              "label": "Aucune"
+            },
+            {
+              "value": "box",
+              "label": "Colis"
+            },
+            {
+              "value": "truck",
+              "label": "Camion"
+            },
+            {
+              "value": "return",
+              "label": "Retour"
+            },
+            {
+              "value": "leaf",
+              "label": "Feuille"
+            },
+            {
+              "value": "sparkle",
+              "label": "Étincelle"
+            },
+            {
+              "value": "chat",
+              "label": "Bulle"
+            },
+            {
+              "value": "tag",
+              "label": "Étiquette"
+            }
           ],
           "default": "none"
         },
@@ -470,15 +567,35 @@
           "label": "Contenu",
           "info": "Reliez ce champ à un métachamp produit (ex. Caractéristiques, Conseils d'utilisation) pour un contenu propre à chaque produit. L'accordéon est masqué s'il est vide."
         },
-        { "type": "page", "id": "page", "label": "Contenu d'une page (facultatif)", "info": "Utile pour un texte commun, par exemple « Livraison et retours »." },
-        { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": false }
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Contenu d'une page (facultatif)",
+          "info": "Utile pour un texte commun, par exemple « Livraison et retours »."
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Ouvert par défaut",
+          "default": false
+        }
       ]
     },
-    { "type": "share", "name": "Partager", "limit": 1 },
+    {
+      "type": "share",
+      "name": "Partager",
+      "limit": 1
+    },
     {
       "type": "custom_liquid",
       "name": "Liquid personnalisé",
-      "settings": [{ "type": "liquid", "id": "custom_liquid", "label": "Code Liquid" }]
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Code Liquid"
+        }
+      ]
     }
   ],
   "settings": [
@@ -487,8 +604,14 @@
       "id": "gallery_layout",
       "label": "Galerie sur ordinateur",
       "options": [
-        { "value": "slider", "label": "Image principale et vignettes" },
-        { "value": "grid", "label": "Grille d'images" }
+        {
+          "value": "slider",
+          "label": "Image principale et vignettes"
+        },
+        {
+          "value": "grid",
+          "label": "Grille d'images"
+        }
       ],
       "default": "slider"
     },
@@ -497,9 +620,18 @@
       "id": "gallery_ratio",
       "label": "Format des médias",
       "options": [
-        { "value": "square", "label": "Carré" },
-        { "value": "portrait", "label": "Portrait" },
-        { "value": "adapt", "label": "Adapté à l'image principale" }
+        {
+          "value": "square",
+          "label": "Carré"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "adapt",
+          "label": "Adapté à l'image principale"
+        }
       ],
       "default": "square"
     },
@@ -508,27 +640,83 @@
       "id": "gallery_fit",
       "label": "Cadrage",
       "options": [
-        { "value": "cover", "label": "Remplir" },
-        { "value": "contain", "label": "Image entière" }
+        {
+          "value": "cover",
+          "label": "Remplir"
+        },
+        {
+          "value": "contain",
+          "label": "Image entière"
+        }
       ],
       "default": "contain"
     },
-    { "type": "checkbox", "id": "enable_zoom", "label": "Agrandissement des images", "default": true },
-    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Fil d'Ariane", "default": true },
-    { "type": "checkbox", "id": "show_sticky_atc", "label": "Barre d'achat fixe sur mobile", "default": true },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Agrandissement des images",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Fil d'Ariane",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_atc",
+      "label": "Barre d'achat fixe sur mobile",
+      "default": true
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 24 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 64 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 64
+    }
   ]
 }
 {% endschema %}

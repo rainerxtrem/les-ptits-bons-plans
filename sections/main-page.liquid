@@ -25,14 +25,24 @@
       "type": "paragraph",
       "content": "Le titre et le texte se modifient dans Boutique en ligne > Pages."
     },
-    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre"
+    },
     {
       "type": "select",
       "id": "style",
       "label": "Style du texte",
       "options": [
-        { "value": "editorial", "label": "Éditorial" },
-        { "value": "legal", "label": "Document (pages légales)" }
+        {
+          "value": "editorial",
+          "label": "Éditorial"
+        },
+        {
+          "value": "legal",
+          "label": "Document (pages légales)"
+        }
       ],
       "default": "editorial"
     },
@@ -41,8 +51,14 @@
       "id": "width",
       "label": "Largeur",
       "options": [
-        { "value": "narrow", "label": "Étroite" },
-        { "value": "medium", "label": "Moyenne" }
+        {
+          "value": "narrow",
+          "label": "Étroite"
+        },
+        {
+          "value": "medium",
+          "label": "Moyenne"
+        }
       ],
       "default": "narrow"
     },
@@ -51,8 +67,14 @@
       "id": "align",
       "label": "Alignement du titre",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Centré" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centré"
+        }
       ],
       "default": "center"
     },
@@ -61,14 +83,41 @@
       "id": "header_scheme",
       "label": "Couleurs de l'en-tête",
       "options": [
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "offwhite", "label": "Blanc cassé" }
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        }
       ],
       "default": "ivory"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ]
 }
 {% endschema %}

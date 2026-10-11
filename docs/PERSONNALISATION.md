@@ -7,8 +7,8 @@ Ouvrez **Boutique en ligne > Thèmes > Personnaliser**. Tout se règle sans touc
 | Groupe | Réglages |
 | --- | --- |
 | Logo et favicon | Logo (image), logo clair pour le pied de page sombre, largeur ordinateur et mobile, favicon |
-| Couleurs | Palette de la marque (sauge, sauge foncé, or, ivoire, blanc cassé, anthracite), boutons, rouge promotion, vert confirmation, vert foncé du pied de page |
-| Typographie | Polices de la marque par défaut (DM Serif Display et Inter, hébergées dans le thème), possibilité de les remplacer par la bibliothèque Shopify, échelle des titres et du texte |
+| Couleurs | Direction « Marché malin » : vert de marque, vert foncé, vert clair, jaune bons plans (boutons, étiquettes), rouge promo (prix réduits, pastilles), neutres |
+| Typographie | Inter (hébergée dans le thème), titres très gras ; possibilité de la remplacer par la bibliothèque Shopify, échelle des titres et du texte |
 | Mise en page | Largeur maximale, arrondis des cartes et des boutons, apparition discrète des sections |
 | Cartes produit | Format d'image, cadrage, image au survol, marque, ajout rapide, style du badge promo (pourcentage calculé ou « Bon plan ») |
 | Panier | Tiroir latéral ou page, note de commande, champ code de réduction, collection suggérée quand le panier est vide |
@@ -17,15 +17,15 @@ Ouvrez **Boutique en ligne > Thèmes > Personnaliser**. Tout se règle sans touc
 | Réseaux sociaux | Instagram, Facebook, TikTok, Pinterest, YouTube, LinkedIn |
 | Partage | Image par défaut pour les réseaux sociaux |
 
-> Le bouton principal utilise un vert sauge foncé légèrement assombri (`#5B6C60`, contraste 5,59:1) : le `#6E7F73` de la charte n’atteint que 4,25:1 avec un texte blanc, sous le seuil AA de 4,5:1. Il reste utilisé pour les accents et les éléments décoratifs.
+> Contrastes vérifiés : texte noir sur jaune 12,05:1, blanc sur vert 5,34:1, blanc sur rouge 4,99:1. Évitez le texte vert sur fond jaune (3,7:1).
 
 ## Sections disponibles
 
-Chaque section propose un **choix de couleurs** (blanc cassé, blanc, ivoire, sauge très clair, sauge, vert foncé) et des **marges** réglables, pour alterner les fonds et rythmer la page.
+Chaque section propose un **choix de couleurs** (blanc, gris clair, vert clair, vert, vert foncé, jaune, rouge promo) et des **marges** réglables, pour alterner les fonds et rythmer la page.
 
 | Section | Usage |
 | --- | --- |
-| Bannière d'accueil | Image ordinateur et mobile, disposition côte à côte ou texte sur l'image, hauteur, alignement, assombrissement, surtitre, titre (un mot en *italique* s'affiche en vert sauge), texte, deux boutons |
+| Bannière d'accueil | Image ordinateur et mobile, disposition côte à côte ou texte sur l'image, hauteur, alignement, assombrissement, surtitre, titre (les mots en *italique* sont surlignés en jaune), pastille ronde « Prix mini », texte, deux boutons |
 | Grille de catégories | Blocs « Catégorie » : collection, image, titre, accroche, lien. 2 à 5 colonnes, titre sous l'image ou sur l'image |
 | Produits mis en avant | Collection, nombre de produits, grille ou carrousel. Filtre « tous / disponibles / en promotion ». Masquage automatique si vide. Préréglages « Promotions » et « Nouveautés » |
 | Image et texte | Bannière éditoriale asymétrique, image secondaire superposée, filet doré, deux boutons |

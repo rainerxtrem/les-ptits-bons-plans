@@ -41,12 +41,32 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
-      "default": "sage"
+      "default": "yellow"
     },
     {
       "type": "checkbox",
@@ -89,9 +109,17 @@
   "presets": [
     {
       "name": "Barre d'annonce",
-      "blocks": [{ "type": "announcement" }]
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
     }
   ],
-  "enabled_on": { "groups": ["header"] }
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  }
 }
 {% endschema %}

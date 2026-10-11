@@ -9,15 +9,16 @@
         "text_align": "left",
         "vertical_align": "center",
         "overlay": 30,
-        "color_scheme": "ivory",
+        "color_scheme": "yellow",
         "show_decor": true,
-        "eyebrow": "Vos envies, nos bons plans",
-        "heading": "Les bonnes trouvailles <em>n'attendent que vous.</em>",
-        "text": "<p>Découvrez une sélection de produits à prix malins, pour vous faire plaisir et dénicher de belles surprises.</p>",
-        "button_label_1": "Explorer la boutique",
+        "eyebrow": "Prix mini, plaisir maxi",
+        "heading": "Les bonnes affaires <em>sont ici !</em>",
+        "text": "<p>Maison, accessoires, loisirs, idées cadeaux… Des trouvailles à petits prix, sélectionnées pour vous.</p>",
+        "button_label_1": "J'en profite",
         "button_link_1": "shopify://collections/all",
-        "button_label_2": "Voir les offres du moment",
-        "button_link_2": "shopify://collections/reductions"
+        "button_label_2": "Voir les promos",
+        "button_link_2": "shopify://collections/reductions",
+        "sticker_text": "Prix\nmini"
       }
     },
     "categories": {
@@ -63,7 +64,7 @@
         "category-4"
       ],
       "settings": {
-        "eyebrow": "Explorer",
+        "eyebrow": "Par rayon",
         "heading": "Trouvez votre <em>bon plan</em>",
         "text": "<p>Parcourez nos sélections et dénichez la trouvaille qui vous fait envie.</p>",
         "heading_align": "left",
@@ -82,7 +83,7 @@
       "type": "featured-collection",
       "settings": {
         "eyebrow": "Sélection",
-        "heading": "Nos <em>pépites</em> du moment",
+        "heading": "Les <em>bons plans</em> du moment",
         "text": "<p>Une sélection de produits coups de cœur, à prix malins.</p>",
         "collection": "pepites-du-moment",
         "filter": "all",
@@ -91,9 +92,9 @@
         "layout": "grid",
         "columns_desktop": 4,
         "show_view_all": true,
-        "view_all_label": "Voir toute la sélection",
+        "view_all_label": "Tout voir",
         "view_all_position": "top",
-        "color_scheme": "white",
+        "color_scheme": "ivory",
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -105,12 +106,12 @@
         "ratio": "portrait",
         "wide_media": false,
         "show_accent": true,
-        "eyebrow": "Notre esprit",
-        "heading": "Le plaisir des <em>bonnes découvertes.</em>",
-        "text": "<p>Une boutique pensée pour dénicher des produits intéressants, découvrir de nouvelles idées et profiter de prix avantageux.</p>",
-        "button_label": "Découvrir la boutique",
+        "eyebrow": "Le concept",
+        "heading": "Des prix malins, <em>toute l’année</em>",
+        "text": "<p>Chez Les p'tits bons plans, on déniche des produits utiles et sympas, et on les propose au meilleur prix. Une sélection qui change régulièrement : revenez souvent, il y a toujours une nouvelle trouvaille !</p>",
+        "button_label": "Je fouille le catalogue",
         "button_link": "shopify://collections/all",
-        "color_scheme": "ivory",
+        "color_scheme": "sage-light",
         "padding_top": 88,
         "padding_bottom": 88
       }
@@ -137,9 +138,9 @@
     "promotions": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Offres du moment",
-        "heading": "Les <em>bons plans</em> en cours",
-        "text": "<p>Des produits dont le prix est actuellement réduit par rapport à leur prix habituel.</p>",
+        "eyebrow": "Promos",
+        "heading": "Prix <em>en baisse</em>",
+        "text": "<p>Les produits dont le prix est actuellement réduit.</p>",
         "collection": "reductions",
         "filter": "on_sale",
         "products_to_show": 8,
@@ -147,9 +148,9 @@
         "layout": "grid",
         "columns_desktop": 4,
         "show_view_all": true,
-        "view_all_label": "Voir tous les bons plans",
+        "view_all_label": "Voir toutes les promos",
         "view_all_position": "bottom",
-        "color_scheme": "sage-light",
+        "color_scheme": "red",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -197,11 +198,11 @@
         "item-4"
       ],
       "settings": {
-        "eyebrow": "Nos engagements",
-        "heading": "Acheter malin, <em>en toute confiance</em>",
+        "eyebrow": "Pourquoi nous",
+        "heading": "Acheter malin, <em>en confiance</em>",
         "style": "plain",
         "align": "left",
-        "color_scheme": "white",
+        "color_scheme": "sage",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -212,9 +213,9 @@
         "tile-1": {
           "type": "tile",
           "settings": {
-            "background": "sage-light",
+            "background": "gold",
             "label": "Idées cadeaux",
-            "title": "Faites-vous plaisir sans vous ruiner",
+            "title": "Faites plaisir sans vous ruiner",
             "text": "Des idées pour toutes les occasions, à petits prix.",
             "cta": "Découvrir",
             "link": "shopify://collections/all",
@@ -224,9 +225,9 @@
         "tile-2": {
           "type": "tile",
           "settings": {
-            "background": "ivory",
-            "label": "Maison",
-            "title": "De belles découvertes, de petits prix",
+            "background": "sage",
+            "label": "Sélection",
+            "title": "Les pépites du moment",
             "text": "Notre sélection du moment, choisie avec soin.",
             "cta": "Voir les pépites",
             "link": "shopify://collections/pepites-du-moment",
@@ -236,9 +237,9 @@
         "tile-3": {
           "type": "tile",
           "settings": {
-            "background": "gold",
-            "label": "Saison",
-            "title": "Les pépites du moment",
+            "background": "red",
+            "label": "Promos",
+            "title": "Les prix réduits",
             "text": "Les produits à prix réduit en ce moment.",
             "cta": "Voir les réductions",
             "link": "shopify://collections/reductions",
@@ -253,7 +254,7 @@
       ],
       "settings": {
         "eyebrow": "En ce moment",
-        "heading": "Les sélections <em>de saison</em>",
+        "heading": "Les rayons <em>à ne pas rater</em>",
         "heading_align": "left",
         "layout": "feature",
         "color_scheme": "offwhite",
@@ -265,7 +266,7 @@
       "type": "newsletter",
       "settings": {
         "eyebrow": "Newsletter",
-        "heading": "Ne manquez plus <em>aucune pépite</em>",
+        "heading": "Les bons plans <em>en avant-première</em>",
         "text": "<p>Recevez nos nouveautés et nos sélections du moment, directement dans votre boîte mail.</p>",
         "button_label": "Je m'inscris",
         "consent": "<p>En vous inscrivant, vous acceptez de recevoir nos e-mails. Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque message.</p>",

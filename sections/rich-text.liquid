@@ -31,8 +31,14 @@
       "id": "align",
       "label": "Alignement",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Centré" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centré"
+        }
       ],
       "default": "center"
     },
@@ -41,37 +47,102 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 64 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 64
+    }
   ],
   "blocks": [
     {
       "type": "eyebrow",
       "name": "Surtitre",
-      "settings": [{ "type": "text", "id": "text", "label": "Texte", "default": "Les p'tits bons plans" }]
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Les p'tits bons plans"
+        }
+      ]
     },
     {
       "type": "heading",
       "name": "Titre",
       "settings": [
-        { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Vos envies, <em>nos bons plans.</em>" },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Vos envies, <em>nos bons plans.</em>"
+        },
         {
           "type": "select",
           "id": "size",
           "label": "Taille",
           "options": [
-            { "value": "h1", "label": "Grande" },
-            { "value": "h2", "label": "Moyenne" },
-            { "value": "h3", "label": "Petite" }
+            {
+              "value": "h1",
+              "label": "Grande"
+            },
+            {
+              "value": "h2",
+              "label": "Moyenne"
+            },
+            {
+              "value": "h3",
+              "label": "Petite"
+            }
           ],
           "default": "h2"
         }
@@ -80,21 +151,43 @@
     {
       "type": "text",
       "name": "Texte",
-      "settings": [{ "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Partagez ici l'esprit de votre boutique.</p>" }]
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Partagez ici l'esprit de votre boutique.</p>"
+        }
+      ]
     },
     {
       "type": "button",
       "name": "Bouton",
       "settings": [
-        { "type": "text", "id": "label", "label": "Libellé", "default": "Découvrir" },
-        { "type": "url", "id": "link", "label": "Lien" },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé",
+          "default": "Découvrir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Lien"
+        },
         {
           "type": "select",
           "id": "style",
           "label": "Style",
           "options": [
-            { "value": "primary", "label": "Principal" },
-            { "value": "secondary", "label": "Secondaire" }
+            {
+              "value": "primary",
+              "label": "Principal"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondaire"
+            }
           ],
           "default": "primary"
         }
@@ -104,7 +197,17 @@
   "presets": [
     {
       "name": "Texte enrichi",
-      "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }]
+      "blocks": [
+        {
+          "type": "eyebrow"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
     }
   ]
 }

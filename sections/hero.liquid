@@ -56,8 +56,8 @@
     </div>
 
     <div class="hero__media" style="--focal: {{ s.image.presentation.focal_point | default: 'center' }};">
-      {%- if s.layout == 'split' and s.show_decor -%}
-        <span class="hero__decor hero__decor--circle" aria-hidden="true"></span>
+      {%- if s.sticker_text != blank -%}
+        <span class="sticker sticker--hero" aria-hidden="true">{{ s.sticker_text | escape | newline_to_br }}</span>
       {%- endif -%}
       {%- if has_image -%}
         {%- assign desktop_img = s.image | default: s.image_mobile -%}
@@ -106,8 +106,14 @@
       "id": "layout",
       "label": "Disposition",
       "options": [
-        { "value": "split", "label": "Texte et image côte à côte" },
-        { "value": "overlay", "label": "Texte sur l'image" }
+        {
+          "value": "split",
+          "label": "Texte et image côte à côte"
+        },
+        {
+          "value": "overlay",
+          "label": "Texte sur l'image"
+        }
       ],
       "default": "split"
     },
@@ -116,8 +122,14 @@
       "id": "image_side",
       "label": "Côté de l'image (côte à côte)",
       "options": [
-        { "value": "right", "label": "À droite" },
-        { "value": "left", "label": "À gauche" }
+        {
+          "value": "right",
+          "label": "À droite"
+        },
+        {
+          "value": "left",
+          "label": "À gauche"
+        }
       ],
       "default": "right"
     },
@@ -126,10 +138,22 @@
       "id": "height",
       "label": "Hauteur",
       "options": [
-        { "value": "small", "label": "Petite" },
-        { "value": "medium", "label": "Moyenne" },
-        { "value": "large", "label": "Grande" },
-        { "value": "full", "label": "Plein écran" }
+        {
+          "value": "small",
+          "label": "Petite"
+        },
+        {
+          "value": "medium",
+          "label": "Moyenne"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        },
+        {
+          "value": "full",
+          "label": "Plein écran"
+        }
       ],
       "default": "medium"
     },
@@ -138,9 +162,18 @@
       "id": "text_align",
       "label": "Alignement du texte",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Centré" },
-        { "value": "right", "label": "À droite (texte sur l'image)" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centré"
+        },
+        {
+          "value": "right",
+          "label": "À droite (texte sur l'image)"
+        }
       ],
       "default": "left"
     },
@@ -149,9 +182,18 @@
       "id": "vertical_align",
       "label": "Position verticale du texte (texte sur l'image)",
       "options": [
-        { "value": "flex-start", "label": "En haut" },
-        { "value": "center", "label": "Au centre" },
-        { "value": "flex-end", "label": "En bas" }
+        {
+          "value": "flex-start",
+          "label": "En haut"
+        },
+        {
+          "value": "center",
+          "label": "Au centre"
+        },
+        {
+          "value": "flex-end",
+          "label": "En bas"
+        }
       ],
       "default": "center"
     },
@@ -170,23 +212,53 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "ivory"
     },
     {
       "type": "checkbox",
       "id": "show_decor",
-      "label": "Décor discret aux couleurs de la marque",
+      "label": "Formes décoratives aux couleurs de la marque",
       "default": true
     },
     {
       "type": "header",
       "content": "Contenu"
+    },
+    {
+      "type": "textarea",
+      "id": "sticker_text",
+      "label": "Pastille sur l'image (facultative)",
+      "info": "Ex. « Prix mini ». Retour à la ligne possible. N'affichez pas de remise qui n'existe pas.",
+      "default": "Prix\nmini"
     },
     {
       "type": "text",
@@ -198,8 +270,8 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Titre",
-      "info": "Mettez un mot en italique pour l'accentuer en vert sauge.",
-      "default": "Les bonnes trouvailles <em>n'attendent que vous.</em>"
+      "info": "Mettez des mots en italique pour les surligner en jaune.",
+      "default": "Les bonnes affaires <em>sont ici !</em>"
     },
     {
       "type": "richtext",

@@ -1,9 +1,9 @@
 # Les p'tits bons plans — thème Shopify
 
-Thème Shopify Online Store 2.0 sur mesure pour la boutique **« Les p'tits bons plans »** : une enseigne de bonnes affaires généraliste, chaleureuse et soignée, avec une identité française (vert sauge, ivoire, touches d'or doux).
+Thème Shopify Online Store 2.0 sur mesure pour la boutique **« Les p'tits bons plans »** : une enseigne de bonnes affaires généraliste, énergique et crédible, direction « Marché malin » : vert de marque, jaune bons plans, rouge promo, titres très gras et étiquettes de prix façon sticker.
 
 - 100 % natif Shopify : Liquid, modèles JSON, sections et blocs administrables, Ajax Cart API, Section Rendering API, filtres Search & Discovery, recherche prédictive, checkout Shopify.
-- Aucun framework JavaScript, aucune dépendance externe. Les polices de la marque (DM Serif Display, Inter, licence OFL) sont hébergées dans le thème.
+- Aucun framework JavaScript, aucune dépendance externe. La police Inter (licence OFL) est hébergée dans le thème.
 - Aucune donnée inventée : prix, remises, stocks et avis proviennent uniquement de Shopify.
 
 ## Arborescence

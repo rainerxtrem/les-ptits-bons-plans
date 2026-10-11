@@ -3,22 +3,24 @@
   "presets": {
     "Default": {
       "brand_name": "Les p'tits bons plans",
-      "color_sage": "#A8B5A2",
-      "color_sage_dark": "#6E7F73",
-      "color_sage_light": "#EDF0EA",
-      "color_gold": "#C6A75E",
-      "color_gold_text": "#84662A",
-      "color_ivory": "#F7F5F0",
-      "color_offwhite": "#FCFBF8",
-      "color_text": "#2E2E2E",
-      "color_text_muted": "#5E5E5A",
-      "color_border": "#E2DDD2",
-      "color_button": "#5B6C60",
-      "color_button_text": "#FFFFFF",
-      "color_sale": "#B04A3F",
-      "color_success": "#3F6B4F",
-      "color_footer": "#36433A",
-      "cart_type": "drawer"
+      "cart_type": "drawer",
+      "color_green": "#1B7A4A",
+      "color_green_dark": "#14432B",
+      "color_green_light": "#E8F5EC",
+      "color_yellow": "#FFD23F",
+      "color_red": "#D7262E",
+      "color_bg": "#FFFFFF",
+      "color_gray": "#F4F4F0",
+      "color_text": "#1A1A1A",
+      "color_text_muted": "#5A5A5A",
+      "color_border": "#E4E4DE",
+      "color_button": "#FFD23F",
+      "color_button_text": "#1A1A1A",
+      "color_success": "#1B7A4A",
+      "radius": 8,
+      "button_radius": 8,
+      "card_image_ratio": "square",
+      "card_image_fit": "contain"
     }
   }
 }

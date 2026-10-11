@@ -32,17 +32,46 @@
   "class": "section-image-gallery",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Inspirations" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Quelques idées de coffrets" },
-    { "type": "richtext", "id": "text", "label": "Texte", "info": "Présentez uniquement des réalisations ou produits réellement proposés." },
-    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Colonnes sur ordinateur", "default": 4 },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Inspirations"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Quelques idées de coffrets"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "info": "Présentez uniquement des réalisations ou produits réellement proposés."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Colonnes sur ordinateur",
+      "default": 4
+    },
     {
       "type": "select",
       "id": "ratio",
       "label": "Format",
       "options": [
-        { "value": "portrait", "label": "Portrait" },
-        { "value": "square", "label": "Carré" }
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Carré"
+        }
       ],
       "default": "portrait"
     },
@@ -51,30 +80,89 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "image",
       "name": "Image",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "caption", "label": "Légende" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Légende"
+        }
       ]
     }
   ],
   "presets": [
     {
       "name": "Galerie d'images",
-      "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }]
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
     }
   ]
 }

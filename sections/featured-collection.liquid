@@ -149,18 +149,45 @@
   "tag": "div",
   "class": "section-featured-collection",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Sélection" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Nos pépites du moment" },
-    { "type": "richtext", "id": "text", "label": "Texte" },
-    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Sélection"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Nos pépites du moment"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
     {
       "type": "select",
       "id": "filter",
       "label": "Produits affichés",
       "options": [
-        { "value": "all", "label": "Tous les produits de la collection" },
-        { "value": "available", "label": "Uniquement les produits disponibles" },
-        { "value": "on_sale", "label": "Uniquement les produits en promotion" }
+        {
+          "value": "all",
+          "label": "Tous les produits de la collection"
+        },
+        {
+          "value": "available",
+          "label": "Uniquement les produits disponibles"
+        },
+        {
+          "value": "on_sale",
+          "label": "Uniquement les produits en promotion"
+        }
       ],
       "default": "all",
       "info": "« En promotion » : produits ayant un prix comparatif supérieur au prix de vente, renseigné dans Shopify. Les 50 premiers produits de la collection sont analysés."
@@ -196,8 +223,14 @@
       "id": "layout",
       "label": "Présentation",
       "options": [
-        { "value": "grid", "label": "Grille" },
-        { "value": "carousel", "label": "Carrousel" }
+        {
+          "value": "grid",
+          "label": "Grille"
+        },
+        {
+          "value": "carousel",
+          "label": "Carrousel"
+        }
       ],
       "default": "grid"
     },
@@ -210,15 +243,31 @@
       "label": "Colonnes sur ordinateur",
       "default": 4
     },
-    { "type": "checkbox", "id": "show_view_all", "label": "Afficher le lien « Tout voir »", "default": true },
-    { "type": "text", "id": "view_all_label", "label": "Libellé du lien", "default": "Tout voir" },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Afficher le lien « Tout voir »",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "Libellé du lien",
+      "default": "Tout voir"
+    },
     {
       "type": "select",
       "id": "view_all_position",
       "label": "Position du lien",
       "options": [
-        { "value": "top", "label": "À côté du titre" },
-        { "value": "bottom", "label": "Sous les produits" }
+        {
+          "value": "top",
+          "label": "À côté du titre"
+        },
+        {
+          "value": "bottom",
+          "label": "Sous les produits"
+        }
       ],
       "default": "top"
     },
@@ -227,20 +276,66 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ],
   "presets": [
-    { "name": "Produits mis en avant" },
+    {
+      "name": "Produits mis en avant"
+    },
     {
       "name": "Promotions",
       "settings": {

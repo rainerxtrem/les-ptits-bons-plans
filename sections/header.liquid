@@ -279,8 +279,14 @@
       "id": "logo_position",
       "label": "Position du logo sur ordinateur",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Au centre" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Au centre"
+        }
       ],
       "default": "left"
     },
@@ -289,9 +295,18 @@
       "id": "sticky",
       "label": "En-tête fixe",
       "options": [
-        { "value": "none", "label": "Non" },
-        { "value": "always", "label": "Toujours visible" },
-        { "value": "scroll-up", "label": "Visible en remontant la page" }
+        {
+          "value": "none",
+          "label": "Non"
+        },
+        {
+          "value": "always",
+          "label": "Toujours visible"
+        },
+        {
+          "value": "scroll-up",
+          "label": "Visible en remontant la page"
+        }
       ],
       "default": "scroll-up"
     },
@@ -300,9 +315,26 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "white", "label": "Blanc" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
@@ -325,13 +357,35 @@
           "info": "Doit correspondre exactement au titre de l'entrée du menu principal (ex. « Catalogue »).",
           "default": "Catalogue"
         },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "label", "label": "Étiquette", "default": "Sélection" },
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Les pépites du moment" },
-        { "type": "url", "id": "link", "label": "Lien" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Étiquette",
+          "default": "Sélection"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Les pépites du moment"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Lien"
+        }
       ]
     }
   ],
-  "enabled_on": { "groups": ["header"] }
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  }
 }
 {% endschema %}

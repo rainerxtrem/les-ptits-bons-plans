@@ -65,39 +65,123 @@
   "tag": "div",
   "class": "section-faq",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Questions fréquentes" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Tout savoir sur vos <em>commandes</em>" },
-    { "type": "richtext", "id": "text", "label": "Texte" },
-    { "type": "text", "id": "contact_text", "label": "Texte d'aide", "default": "Vous ne trouvez pas votre réponse ?" },
-    { "type": "text", "id": "contact_label", "label": "Libellé du bouton", "default": "Nous contacter" },
-    { "type": "url", "id": "contact_link", "label": "Lien du bouton", "info": "Par exemple, votre page Contact." },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Questions fréquentes"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Tout savoir sur vos <em>commandes</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Texte d'aide",
+      "default": "Vous ne trouvez pas votre réponse ?"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Libellé du bouton",
+      "default": "Nous contacter"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Lien du bouton",
+      "info": "Par exemple, votre page Contact."
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "offwhite"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "group",
       "name": "Thème de questions",
-      "settings": [{ "type": "text", "id": "title", "label": "Titre", "default": "Commandes" }]
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Commandes"
+        }
+      ]
     },
     {
       "type": "question",
       "name": "Question",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "Comment passer commande ?" },
-        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Ajoutez les produits de votre choix au panier, puis cliquez sur « Passer commande » pour finaliser votre achat sur notre page de paiement sécurisée.</p>" }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Comment passer commande ?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p>Ajoutez les produits de votre choix au panier, puis cliquez sur « Passer commande » pour finaliser votre achat sur notre page de paiement sécurisée.</p>"
+        }
       ]
     }
   ],
@@ -105,7 +189,9 @@
     {
       "name": "FAQ",
       "blocks": [
-        { "type": "question" }
+        {
+          "type": "question"
+        }
       ]
     }
   ]

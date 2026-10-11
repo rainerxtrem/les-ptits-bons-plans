@@ -63,15 +63,30 @@
   "tag": "div",
   "class": "section-image-with-text",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image principale" },
-    { "type": "image_picker", "id": "image_secondary", "label": "Image secondaire (facultative)", "info": "Petite image superposée pour une composition éditoriale." },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image principale"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_secondary",
+      "label": "Image secondaire (facultative)",
+      "info": "Petite image superposée pour une composition éditoriale."
+    },
     {
       "type": "select",
       "id": "image_position",
       "label": "Position de l'image",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "right", "label": "À droite" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "right",
+          "label": "À droite"
+        }
       ],
       "default": "left"
     },
@@ -80,44 +95,143 @@
       "id": "ratio",
       "label": "Format de l'image",
       "options": [
-        { "value": "portrait", "label": "Portrait" },
-        { "value": "square", "label": "Carré" },
-        { "value": "landscape", "label": "Paysage" }
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Carré"
+        },
+        {
+          "value": "landscape",
+          "label": "Paysage"
+        }
       ],
       "default": "portrait"
     },
-    { "type": "checkbox", "id": "wide_media", "label": "Image plus large que le texte", "default": false },
-    { "type": "checkbox", "id": "show_accent", "label": "Filet doré décoratif", "default": true },
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Notre esprit" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Le plaisir des <em>bonnes découvertes.</em>" },
+    {
+      "type": "checkbox",
+      "id": "wide_media",
+      "label": "Image plus large que le texte",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accent",
+      "label": "Cadre décoratif",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Notre esprit"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Le plaisir des <em>bonnes découvertes.</em>"
+    },
     {
       "type": "richtext",
       "id": "text",
       "label": "Texte",
       "default": "<p>Une boutique pensée pour dénicher des produits intéressants, découvrir de nouvelles idées et profiter de prix avantageux.</p>"
     },
-    { "type": "text", "id": "signature", "label": "Signature (facultative)" },
-    { "type": "text", "id": "button_label", "label": "Bouton principal", "default": "Découvrir la boutique" },
-    { "type": "url", "id": "button_link", "label": "Lien du bouton principal", "default": "/collections/all" },
-    { "type": "text", "id": "button_label_2", "label": "Bouton secondaire" },
-    { "type": "url", "id": "button_link_2", "label": "Lien du bouton secondaire" },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Signature (facultative)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Bouton principal",
+      "default": "Découvrir la boutique"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Lien du bouton principal",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Bouton secondaire"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Lien du bouton secondaire"
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "ivory"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 88 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 88 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 88
+    }
   ],
-  "presets": [{ "name": "Image et texte" }]
+  "presets": [
+    {
+      "name": "Image et texte"
+    }
+  ]
 }
 {% endschema %}

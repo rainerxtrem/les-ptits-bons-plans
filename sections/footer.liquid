@@ -159,9 +159,18 @@
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "dark", "label": "Vert foncé" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" }
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        }
       ],
       "default": "dark"
     },
@@ -211,16 +220,36 @@
       "type": "menu",
       "name": "Menu",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Boutique" },
-        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Boutique"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
       ]
     },
     {
       "type": "text",
       "name": "Texte",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Service client" },
-        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Une question sur un produit ou une commande ? Écrivez-nous depuis la page contact.</p>" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Service client"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Une question sur un produit ou une commande ? Écrivez-nous depuis la page contact.</p>"
+        }
       ]
     },
     {
@@ -228,11 +257,25 @@
       "name": "Newsletter",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Titre", "default": "Les bons plans par e-mail" },
-        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Nouveautés et sélections du moment, directement dans votre boîte mail.</p>" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Titre",
+          "default": "Les bons plans par e-mail"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Nouveautés et sélections du moment, directement dans votre boîte mail.</p>"
+        }
       ]
     }
   ],
-  "enabled_on": { "groups": ["footer"] }
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  }
 }
 {% endschema %}

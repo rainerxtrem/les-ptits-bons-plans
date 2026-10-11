@@ -14,7 +14,7 @@
   </head>
   <body>
     <main class="password-page">
-      <div class="password-page__inner contact-card" style="background: var(--color-offwhite);">
+      <div class="password-page__inner contact-card" style="background: var(--color-bg);">
         <p class="eyebrow" style="justify-content: center;">{{ settings.brand_name | default: shop.name | escape }}</p>
         <h1 class="h2">{{ 'gift_card.heading' | t }}</h1>
         {%- if gift_card.enabled == false or gift_card.expired -%}

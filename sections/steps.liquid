@@ -30,45 +30,128 @@
   "class": "section-steps",
   "max_blocks": 8,
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Comment ça marche" },
-    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Votre demande <em>en trois étapes</em>" },
-    { "type": "richtext", "id": "text", "label": "Texte" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Comment ça marche"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Votre demande <em>en trois étapes</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte"
+    },
     {
       "type": "select",
       "id": "heading_align",
       "label": "Alignement du titre",
       "options": [
-        { "value": "left", "label": "À gauche" },
-        { "value": "center", "label": "Centré" }
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centré"
+        }
       ],
       "default": "center"
     },
-    { "type": "checkbox", "id": "show_numbers", "label": "Numéroter les étapes", "default": true },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "Numéroter les étapes",
+      "default": true
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Couleurs",
       "options": [
-        { "value": "offwhite", "label": "Blanc cassé" },
-        { "value": "white", "label": "Blanc" },
-        { "value": "ivory", "label": "Beige ivoire" },
-        { "value": "sage-light", "label": "Vert sauge très clair" },
-        { "value": "sage", "label": "Vert sauge" },
-        { "value": "dark", "label": "Vert foncé" }
+        {
+          "value": "offwhite",
+          "label": "Blanc"
+        },
+        {
+          "value": "white",
+          "label": "Blanc pur"
+        },
+        {
+          "value": "ivory",
+          "label": "Gris clair"
+        },
+        {
+          "value": "sage-light",
+          "label": "Vert clair"
+        },
+        {
+          "value": "sage",
+          "label": "Vert"
+        },
+        {
+          "value": "dark",
+          "label": "Vert foncé"
+        },
+        {
+          "value": "yellow",
+          "label": "Jaune"
+        },
+        {
+          "value": "red",
+          "label": "Rouge promo"
+        }
       ],
       "default": "ivory"
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 72
+    }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Étape",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image (facultative)" },
-        { "type": "text", "id": "title", "label": "Titre", "default": "Votre besoin" },
-        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Décrivez votre projet via le formulaire ci-dessous.</p>" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (facultative)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Votre besoin"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Décrivez votre projet via le formulaire ci-dessous.</p>"
+        }
       ]
     }
   ],
@@ -76,9 +159,27 @@
     {
       "name": "Étapes",
       "blocks": [
-        { "type": "step", "settings": { "title": "Votre besoin", "text": "<p>Vous décrivez votre projet : occasion, nombre de destinataires, budget indicatif.</p>" } },
-        { "type": "step", "settings": { "title": "Notre proposition", "text": "<p>Nous étudions votre demande et revenons vers vous avec une sélection adaptée.</p>" } },
-        { "type": "step", "settings": { "title": "Votre validation", "text": "<p>Vous validez la proposition ; les modalités (quantités, délais, livraison) sont confirmées ensemble.</p>" } }
+        {
+          "type": "step",
+          "settings": {
+            "title": "Votre besoin",
+            "text": "<p>Vous décrivez votre projet : occasion, nombre de destinataires, budget indicatif.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Notre proposition",
+            "text": "<p>Nous étudions votre demande et revenons vers vous avec une sélection adaptée.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Votre validation",
+            "text": "<p>Vous validez la proposition ; les modalités (quantités, délais, livraison) sont confirmées ensemble.</p>"
+          }
+        }
       ]
     }
   ]

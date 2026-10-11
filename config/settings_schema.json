@@ -62,107 +62,93 @@
     "settings": [
       {
         "type": "header",
-        "content": "Palette de la marque"
+        "content": "Couleurs de la marque"
       },
       {
         "type": "color",
-        "id": "color_sage",
-        "label": "Vert sauge",
-        "default": "#A8B5A2"
+        "id": "color_green",
+        "label": "Vert de marque",
+        "default": "#1B7A4A"
       },
       {
         "type": "color",
-        "id": "color_sage_dark",
-        "label": "Vert sauge foncé",
-        "default": "#6E7F73"
+        "id": "color_green_dark",
+        "label": "Vert foncé (pied de page, fonds sombres)",
+        "default": "#14432B"
       },
       {
         "type": "color",
-        "id": "color_sage_light",
-        "label": "Vert sauge très clair",
-        "default": "#EDF0EA"
+        "id": "color_green_light",
+        "label": "Vert clair (fonds)",
+        "default": "#E8F5EC"
       },
       {
         "type": "color",
-        "id": "color_gold",
-        "label": "Or doux (accents décoratifs)",
-        "default": "#C6A75E"
+        "id": "color_yellow",
+        "label": "Jaune bons plans (boutons d'action, étiquettes)",
+        "default": "#FFD23F"
       },
       {
         "type": "color",
-        "id": "color_gold_text",
-        "label": "Or profond (petits textes)",
-        "info": "Version plus foncée de l'or, lisible sur fond clair (contraste AA).",
-        "default": "#84662A"
+        "id": "color_red",
+        "label": "Rouge promo (prix réduits, pastilles)",
+        "default": "#D7262E"
+      },
+      {
+        "type": "header",
+        "content": "Neutres"
       },
       {
         "type": "color",
-        "id": "color_ivory",
-        "label": "Beige ivoire",
-        "default": "#F7F5F0"
+        "id": "color_bg",
+        "label": "Fond",
+        "default": "#FFFFFF"
       },
       {
         "type": "color",
-        "id": "color_offwhite",
-        "label": "Blanc cassé",
-        "default": "#FCFBF8"
+        "id": "color_gray",
+        "label": "Gris clair (fonds alternés)",
+        "default": "#F4F4F0"
       },
       {
         "type": "color",
         "id": "color_text",
-        "label": "Anthracite (texte)",
-        "default": "#2E2E2E"
+        "label": "Texte",
+        "default": "#1A1A1A"
       },
       {
         "type": "color",
         "id": "color_text_muted",
         "label": "Texte secondaire",
-        "default": "#5E5E5A"
+        "default": "#5A5A5A"
       },
       {
         "type": "color",
         "id": "color_border",
-        "label": "Bordures et séparateurs",
-        "default": "#E2DDD2"
+        "label": "Bordures",
+        "default": "#E4E4DE"
       },
       {
         "type": "header",
-        "content": "Boutons"
+        "content": "Boutons et états"
       },
       {
         "type": "color",
         "id": "color_button",
         "label": "Bouton principal",
-        "info": "Vert sauge foncé légèrement assombri pour garantir un contraste AA avec le texte blanc.",
-        "default": "#5B6C60"
+        "default": "#FFD23F"
       },
       {
         "type": "color",
         "id": "color_button_text",
         "label": "Texte du bouton principal",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "header",
-        "content": "États et promotions"
-      },
-      {
-        "type": "color",
-        "id": "color_sale",
-        "label": "Rouge doux (promotions)",
-        "default": "#B04A3F"
+        "default": "#1A1A1A"
       },
       {
         "type": "color",
         "id": "color_success",
-        "label": "Vert foncé (confirmations)",
-        "default": "#3F6B4F"
-      },
-      {
-        "type": "color",
-        "id": "color_footer",
-        "label": "Vert foncé (pied de page et fonds sombres)",
-        "default": "#36433A"
+        "label": "Confirmations",
+        "default": "#1B7A4A"
       }
     ]
   },
@@ -171,7 +157,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Par défaut, le thème utilise les polices de la marque hébergées dans le thème : DM Serif Display pour les titres et Inter pour les textes."
+        "content": "Par défaut, le thème utilise Inter (hébergée dans le thème) : titres très gras, texte lisible."
       },
       {
         "type": "checkbox",
@@ -234,7 +220,7 @@
         "step": 1,
         "unit": "px",
         "label": "Arrondi des cartes et images",
-        "default": 10
+        "default": 8
       },
       {
         "type": "range",
@@ -244,7 +230,7 @@
         "step": 2,
         "unit": "px",
         "label": "Arrondi des boutons",
-        "default": 40
+        "default": 8
       },
       {
         "type": "checkbox",
@@ -263,21 +249,36 @@
         "id": "card_image_ratio",
         "label": "Format des images",
         "options": [
-          { "value": "portrait", "label": "Portrait (4:5)" },
-          { "value": "square", "label": "Carré (1:1)" },
-          { "value": "landscape", "label": "Paysage (4:3)" }
+          {
+            "value": "portrait",
+            "label": "Portrait (4:5)"
+          },
+          {
+            "value": "square",
+            "label": "Carré (1:1)"
+          },
+          {
+            "value": "landscape",
+            "label": "Paysage (4:3)"
+          }
         ],
-        "default": "portrait"
+        "default": "square"
       },
       {
         "type": "select",
         "id": "card_image_fit",
         "label": "Cadrage des images",
         "options": [
-          { "value": "cover", "label": "Remplir le cadre" },
-          { "value": "contain", "label": "Image entière (fond neutre)" }
+          {
+            "value": "cover",
+            "label": "Remplir le cadre"
+          },
+          {
+            "value": "contain",
+            "label": "Image entière (fond neutre)"
+          }
         ],
-        "default": "cover"
+        "default": "contain"
       },
       {
         "type": "checkbox",
@@ -303,8 +304,14 @@
         "id": "sale_badge_style",
         "label": "Badge promotion",
         "options": [
-          { "value": "percentage", "label": "Pourcentage calculé (ex. −20 %)" },
-          { "value": "text", "label": "Texte « Bon plan »" }
+          {
+            "value": "percentage",
+            "label": "Pourcentage calculé (ex. −20 %)"
+          },
+          {
+            "value": "text",
+            "label": "Texte « Bon plan »"
+          }
         ],
         "default": "percentage"
       }
@@ -318,8 +325,14 @@
         "id": "cart_type",
         "label": "Type de panier",
         "options": [
-          { "value": "drawer", "label": "Tiroir latéral" },
-          { "value": "page", "label": "Page panier" }
+          {
+            "value": "drawer",
+            "label": "Tiroir latéral"
+          },
+          {
+            "value": "page",
+            "label": "Page panier"
+          }
         ],
         "default": "drawer"
       },
@@ -392,12 +405,42 @@
   {
     "name": "Réseaux sociaux",
     "settings": [
-      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/…" },
-      { "type": "text", "id": "social_facebook_link", "label": "Facebook", "info": "https://facebook.com/…" },
-      { "type": "text", "id": "social_tiktok_link", "label": "TikTok", "info": "https://tiktok.com/@…" },
-      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest", "info": "https://pinterest.com/…" },
-      { "type": "text", "id": "social_youtube_link", "label": "YouTube", "info": "https://youtube.com/…" },
-      { "type": "text", "id": "social_linkedin_link", "label": "LinkedIn", "info": "https://linkedin.com/company/…" }
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/…"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/…"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@…"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/…"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube",
+        "info": "https://youtube.com/…"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn",
+        "info": "https://linkedin.com/company/…"
+      }
     ]
   },
   {
