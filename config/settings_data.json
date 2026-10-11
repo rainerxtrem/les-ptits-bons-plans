@@ -2,6 +2,7 @@
   "current": "Default",
   "presets": {
     "Default": {
+      "brand_name": "Les p'tits bons plans",
       "color_sage": "#A8B5A2",
       "color_sage_dark": "#6E7F73",
       "color_sage_light": "#EDF0EA",

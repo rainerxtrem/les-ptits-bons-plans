@@ -11,6 +11,13 @@
     "name": "Logo et favicon",
     "settings": [
       {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Nom de la marque",
+        "info": "Affiché à la place du nom technique de la boutique (logo texte, titres des pages, pied de page, partage). Pensez aussi à renommer la boutique dans Paramètres > Détails de la boutique pour les e-mails et le paiement.",
+        "default": "Les p'tits bons plans"
+      },
+      {
         "type": "image_picker",
         "id": "logo",
         "label": "Logo",

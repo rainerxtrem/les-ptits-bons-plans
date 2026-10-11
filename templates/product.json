@@ -4,16 +4,20 @@
       "type": "main-product",
       "blocks": {
         "vendor": {
-          "type": "vendor"
+          "type": "vendor",
+          "settings": {}
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "inventory": {
-          "type": "inventory"
+          "type": "inventory",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -68,10 +72,12 @@
           }
         },
         "sku": {
-          "type": "sku"
+          "type": "sku",
+          "settings": {}
         },
         "share": {
-          "type": "share"
+          "type": "share",
+          "settings": {}
         }
       },
       "block_order": [

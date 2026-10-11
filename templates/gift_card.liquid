@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ 'gift_card.title' | t: value: initial_value }} — {{ shop.name }}</title>
+    <title>{{ 'gift_card.title' | t: value: initial_value }} — {{ settings.brand_name | default: shop.name }}</title>
     <meta name="robots" content="noindex, nofollow">
     {% render 'css-variables' %}
     {{ 'base.css' | asset_url | stylesheet_tag }}
@@ -15,7 +15,7 @@
   <body>
     <main class="password-page">
       <div class="password-page__inner contact-card" style="background: var(--color-offwhite);">
-        <p class="eyebrow" style="justify-content: center;">{{ shop.name | escape }}</p>
+        <p class="eyebrow" style="justify-content: center;">{{ settings.brand_name | default: shop.name | escape }}</p>
         <h1 class="h2">{{ 'gift_card.heading' | t }}</h1>
         {%- if gift_card.enabled == false or gift_card.expired -%}
           <p class="form-message form-message--error">{{ 'gift_card.unavailable' | t }}</p>

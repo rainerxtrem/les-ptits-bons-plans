@@ -12,7 +12,9 @@
         "text": "<p>Vous souhaitez offrir une sélection de produits à vos collaborateurs, clients ou partenaires ? Présentez-nous votre projet : nous l'étudions avec vous.</p>",
         "color_scheme": "ivory",
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "button_label": "Voir le catalogue",
+        "button_link": "shopify://collections/all"
       }
     },
     "steps": {

@@ -5,7 +5,6 @@
       {% render 'section-heading', eyebrow: s.eyebrow, heading: s.heading, text: s.text, align: 'center' %}
       <ul class="grid reveal" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }}; --ratio: {% if s.ratio == 'square' %}1 / 1{% else %}4 / 5{% endif %};">
         {%- for block in section.blocks -%}
-          {%- if block.settings.image == blank and request.design_mode == false -%}{%- continue -%}{%- endif -%}
           <li {{ block.shopify_attributes }}>
             <figure class="category-card" style="margin: 0;">
               <div class="category-card__media">

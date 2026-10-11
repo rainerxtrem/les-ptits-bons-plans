@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="{{ settings.brand_name | default: shop.name | escape }}">
     <meta name="theme-color" content="{{ settings.color_offwhite }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -17,11 +18,18 @@
       {{ 'dm-serif-display-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
     {%- endunless -%}
 
+    {%- liquid
+      assign brand = settings.brand_name | default: shop.name
+      assign seo_title = page_title
+      if page_title == blank or page_title == shop.name
+        assign seo_title = brand
+      endif
+    -%}
     <title>
-      {{- page_title -}}
+      {{- seo_title -}}
       {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{%- endif -%}
       {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless seo_title contains brand %} &ndash; {{ brand }}{% endunless -%}
     </title>
 
     {%- if page_description -%}

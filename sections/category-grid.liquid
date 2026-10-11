@@ -34,7 +34,6 @@
             assign placeholder_n = forloop.index0 | modulo: 6 | plus: 1
             assign placeholder_name = 'collection-' | append: placeholder_n
           -%}
-          {%- if collection != blank or request.design_mode or block.settings.link != blank -%}
             <li {{ block.shopify_attributes }}>
               <a href="{{ url | default: routes.collections_url }}" class="category-card{% if s.card_style == 'overlay' %} category-card--overlay{% endif %}">
                 <div class="category-card__media">
@@ -53,7 +52,6 @@
                 </div>
               </a>
             </li>
-          {%- endif -%}
         {%- endfor -%}
       </ul>
     {%- endif -%}

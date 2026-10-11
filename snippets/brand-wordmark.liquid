@@ -1,0 +1,21 @@
+{%- comment -%}
+  Logo texte de la marque (affiché tant qu'aucun logo image n'est choisi).
+  Les deux derniers mots sont mis en valeur : « LES P'TITS » / « bons plans ».
+{%- endcomment -%}
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign words = brand | split: ' '
+-%}
+<span class="wordmark {{ class }}">
+  {%- if words.size >= 3 -%}
+    {%- liquid
+      assign last_index = words.size | minus: 2
+      assign last_two = words | slice: last_index, 2 | join: ' '
+      assign first_part = brand | remove_last: last_two | strip
+    -%}
+    <span class="wordmark__small">{{ first_part | escape }}</span>
+    <span class="wordmark__main">{{ last_two | escape }}</span>
+  {%- else -%}
+    <span class="wordmark__main">{{ brand | escape }}</span>
+  {%- endif -%}
+</span>

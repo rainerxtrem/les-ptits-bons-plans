@@ -7,6 +7,11 @@
 {%- liquid
   assign s = section.settings
   assign collection = s.collection
+  if s.fallback_all
+    if collection == blank or collection.products_count == 0
+      assign collection = collections['all']
+    endif
+  endif
   assign limit = s.products_to_show
 
   assign shown = 0
@@ -159,6 +164,13 @@
       ],
       "default": "all",
       "info": "« En promotion » : produits ayant un prix comparatif supérieur au prix de vente, renseigné dans Shopify. Les 50 premiers produits de la collection sont analysés."
+    },
+    {
+      "type": "checkbox",
+      "id": "fallback_all",
+      "label": "Afficher tout le catalogue si la collection est vide",
+      "info": "Utile au lancement : la section se remplit avec l'ensemble des produits tant que la collection choisie ne contient rien.",
+      "default": true
     },
     {
       "type": "range",

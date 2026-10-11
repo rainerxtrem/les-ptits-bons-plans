@@ -3,10 +3,14 @@
   Les données produit structurées sont générées dans la section main-product à partir des données Shopify réelles.
 {%- endcomment -%}
 {%- liquid
-  assign og_title = page_title | default: shop.name
+  assign brand = settings.brand_name | default: shop.name
+  assign og_title = page_title | default: brand
+  if og_title == shop.name
+    assign og_title = brand
+  endif
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_description = page_description | default: shop.description | default: brand
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -18,7 +22,7 @@
 
   assign og_image = page_image | default: settings.share_image
 -%}
-<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:site_name" content="{{ brand | escape }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:type" content="{{ og_type }}">
@@ -55,7 +59,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": {{ shop.name | json }},
+      "name": {{ brand | json }},
       "url": {{ request.origin | append: routes.root_url | json }}
       {%- if settings.logo %},
       "logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }}
@@ -69,7 +73,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": {{ shop.name | json }},
+      "name": {{ brand | json }},
       "url": {{ request.origin | append: routes.root_url | json }},
       "potentialAction": {
         "@type": "SearchAction",

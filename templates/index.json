@@ -16,7 +16,8 @@
         "text": "<p>Découvrez une sélection de produits à prix malins, pour vous faire plaisir et dénicher de belles surprises.</p>",
         "button_label_1": "Explorer la boutique",
         "button_link_1": "shopify://collections/all",
-        "button_label_2": "Voir les offres du moment"
+        "button_label_2": "Voir les offres du moment",
+        "button_link_2": "shopify://collections/reductions"
       }
     },
     "categories": {
@@ -25,29 +26,33 @@
         "category-1": {
           "type": "category",
           "settings": {
-            "title": "Maison",
-            "text": "Petits prix pour un intérieur chaleureux"
+            "collection": "pepites-du-moment",
+            "title": "Pépites du moment",
+            "text": "Notre sélection coup de cœur"
           }
         },
         "category-2": {
           "type": "category",
           "settings": {
-            "title": "Accessoires",
-            "text": "Les essentiels du quotidien"
+            "collection": "reductions",
+            "title": "Réductions",
+            "text": "Les prix doux du moment"
           }
         },
         "category-3": {
           "type": "category",
           "settings": {
-            "title": "Loisirs",
-            "text": "De quoi se faire plaisir"
+            "title": "Tout le catalogue",
+            "text": "Toutes nos trouvailles",
+            "link": "shopify://collections/all"
           }
         },
         "category-4": {
           "type": "category",
           "settings": {
             "title": "Idées cadeaux",
-            "text": "Pour faire plaisir sans se ruiner"
+            "text": "Pour faire plaisir sans se ruiner",
+            "link": "shopify://collections/all"
           }
         }
       },
@@ -60,6 +65,7 @@
       "settings": {
         "eyebrow": "Explorer",
         "heading": "Trouvez votre <em>bon plan</em>",
+        "text": "<p>Parcourez nos sélections et dénichez la trouvaille qui vous fait envie.</p>",
         "heading_align": "left",
         "link_label": "Toutes les catégories",
         "link_url": "shopify://collections",
@@ -77,6 +83,8 @@
       "settings": {
         "eyebrow": "Sélection",
         "heading": "Nos <em>pépites</em> du moment",
+        "text": "<p>Une sélection de produits coups de cœur, à prix malins.</p>",
+        "collection": "pepites-du-moment",
         "filter": "all",
         "products_to_show": 8,
         "hide_if_empty": true,
@@ -109,6 +117,7 @@
     },
     "nouveautes": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "eyebrow": "Fraîchement arrivés",
         "heading": "Les nouveautés",
@@ -131,6 +140,7 @@
         "eyebrow": "Offres du moment",
         "heading": "Les <em>bons plans</em> en cours",
         "text": "<p>Des produits dont le prix est actuellement réduit par rapport à leur prix habituel.</p>",
+        "collection": "reductions",
         "filter": "on_sale",
         "products_to_show": 8,
         "hide_if_empty": true,
@@ -187,6 +197,8 @@
         "item-4"
       ],
       "settings": {
+        "eyebrow": "Nos engagements",
+        "heading": "Acheter malin, <em>en toute confiance</em>",
         "style": "plain",
         "align": "left",
         "color_scheme": "white",
@@ -200,29 +212,37 @@
         "tile-1": {
           "type": "tile",
           "settings": {
+            "background": "sage-light",
             "label": "Idées cadeaux",
             "title": "Faites-vous plaisir sans vous ruiner",
             "text": "Des idées pour toutes les occasions, à petits prix.",
             "cta": "Découvrir",
-            "background": "sage-light"
+            "link": "shopify://collections/all",
+            "show_placeholder": true
           }
         },
         "tile-2": {
           "type": "tile",
           "settings": {
+            "background": "ivory",
             "label": "Maison",
             "title": "De belles découvertes, de petits prix",
-            "cta": "Découvrir",
-            "background": "ivory"
+            "text": "Notre sélection du moment, choisie avec soin.",
+            "cta": "Voir les pépites",
+            "link": "shopify://collections/pepites-du-moment",
+            "show_placeholder": true
           }
         },
         "tile-3": {
           "type": "tile",
           "settings": {
+            "background": "gold",
             "label": "Saison",
             "title": "Les pépites du moment",
-            "cta": "Découvrir",
-            "background": "gold"
+            "text": "Les produits à prix réduit en ce moment.",
+            "cta": "Voir les réductions",
+            "link": "shopify://collections/reductions",
+            "show_placeholder": true
           }
         }
       },
@@ -248,6 +268,7 @@
         "heading": "Ne manquez plus <em>aucune pépite</em>",
         "text": "<p>Recevez nos nouveautés et nos sélections du moment, directement dans votre boîte mail.</p>",
         "button_label": "Je m'inscris",
+        "consent": "<p>En vous inscrivant, vous acceptez de recevoir nos e-mails. Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque message.</p>",
         "boxed": true,
         "align": "split",
         "color_scheme": "offwhite",

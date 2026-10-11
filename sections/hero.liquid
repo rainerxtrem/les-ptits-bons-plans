@@ -68,10 +68,8 @@
         {%- else -%}
           {% render 'responsive-image', image: desktop_img, sizes: img_sizes, priority: is_first %}
         {%- endif -%}
-      {%- elsif request.design_mode -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- else -%}
-        <div class="hero__brand-art" aria-hidden="true"><span>{{ shop.name | escape }}</span></div>
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     </div>
   </div>

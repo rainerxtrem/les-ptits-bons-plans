@@ -36,11 +36,17 @@
                 assign tile_bg = 'var(--color-offwhite)'
             endcase
           -%}
-          <{{ tile_tag }}{% if b.link != blank %} href="{{ b.link }}"{% endif %} class="tile{% if b.image != blank %} tile--image{% endif %}" style="--tile-bg: {{ tile_bg }};" {{ block.shopify_attributes }}>
+          <{{ tile_tag }}{% if b.link != blank %} href="{{ b.link }}"{% endif %} class="tile{% if b.image != blank or b.show_placeholder %} tile--image{% endif %}" style="--tile-bg: {{ tile_bg }};" {{ block.shopify_attributes }}>
             {%- if b.image != blank -%}
               <div class="tile__img">
                 {% render 'responsive-image', image: b.image, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400,600,800,1000,1300' %}
               </div>
+            {%- elsif b.show_placeholder -%}
+              {%- liquid
+                assign ph_n = forloop.index0 | modulo: 2 | plus: 1
+                assign ph = 'lifestyle-' | append: ph_n
+              -%}
+              <div class="tile__img tile__img--placeholder" aria-hidden="true">{{ ph | placeholder_svg_tag: 'placeholder-svg' }}</div>
             {%- endif -%}
             {%- if b.label != blank -%}<span class="tile__label">{{ b.label | escape }}</span>{%- endif -%}
             <h3 class="tile__title h2">{{ b.title | escape }}</h3>
@@ -110,6 +116,7 @@
       "name": "Tuile",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (facultative)" },
+        { "type": "checkbox", "id": "show_placeholder", "label": "Image d'exemple tant qu'aucune image n'est choisie", "default": true },
         {
           "type": "select",
           "id": "background",
