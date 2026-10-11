@@ -10,11 +10,20 @@
 | Polices | contrôle des fichiers woff2 (sous-ensemble latin : accents français, œ, guillemets) | OK |
 | Contrastes des couleurs (WCAG 2.1) | calcul de luminance relative | Bouton `#5B6C60` / blanc : 5,59:1 ; rouge promo `#B04A3F` / blanc : 5,39:1 ; anthracite / sauge : 6,33:1 ; or profond `#84662A` / ivoire : 4,92:1 ; ivoire / vert du pied de page : 9,54:1. Le `#6E7F73` de la charte sur blanc (4,25:1) est insuffisant pour du texte, d'où la teinte ajustée des boutons |
 
+| Envoi sur la boutique `10vqni-hy.myshopify.com` | `shopify theme push --unpublished` | Thème « Les p'tits bons plans » (#201509962111) créé, non publié. Les deux erreurs de syntaxe Liquid détectées par Shopify au premier envoi (non signalées par Theme Check) ont été corrigées, et le second envoi s'est fait sans erreur |
+| Rendu réel des pages (serveur `shopify theme dev`) | requêtes HTTP sur l'accueil, `/collections/all`, `/collections`, `/search` (avec et sans requête), `/cart`, `/pages/contact`, une URL inexistante et une fiche produit | Codes 200 (404 pour la page inexistante), aucune « Liquid error », aucune « translation missing » |
+| Structure de l'accueil | analyse du HTML rendu | Hero, bannière éditoriale, engagements, sélection saisonnière, newsletter, en-tête, tiroirs (menu, recherche, panier) et pied de page présents. Grilles catégories et produits masquées tant qu'aucune collection n'est choisie (comportement voulu) |
+| Fiche produit | analyse du HTML rendu | Titre, galerie, bouton d'ajout, paiement express Shopify, accordéons, barre fixe mobile, données structurées `Product` |
+| Ajout au panier Ajax | `POST /cart/add.js` avec `sections=cart-drawer,cart-icon-bubble` | Article ajouté, sections du tiroir et du compteur renvoyées par Shopify |
+| Code de réduction | `POST /cart/update.js` avec un code inexistant | Shopify renvoie `applicable: false`, que le thème affiche comme message d'erreur |
+
 La validation automatique est relancée à chaque push par le workflow GitHub **Theme Check**.
+
+Non exécuté : captures d'écran (le navigateur headless n'a pas produit d'image dans l'environnement de développement) et changement de variante (les 5 produits actuels de la boutique n'ont qu'une variante chacun).
 
 ## À tester sur la boutique
 
-Ces tests demandent un accès à la boutique, avec des produits, collections et réglages réels. Ils n'ont pas encore pu être exécutés : la session Shopify CLI de l'environnement de développement n'avait pas accès à `10vqni-hy.myshopify.com`.
+À vérifier manuellement dans le navigateur, une fois le catalogue, les collections et les menus configurés.
 
 ### Parcours d'achat
 - [ ] Fiche produit avec variantes : le changement d'option met à jour le prix, le prix barré, le badge, la disponibilité, la référence, l'image et l'URL (`?variant=`).
