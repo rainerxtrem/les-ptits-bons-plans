@@ -1,0 +1,251 @@
+{%- comment -%}
+  Produits d'une collection Shopify (pépites, nouveautés, promotions, sélections).
+  Filtre « promotions » : ne garde que les produits dont au moins une variante a un
+  prix comparatif supérieur à son prix (données réelles Shopify). Analyse les 50 premiers
+  produits de la collection, dans l'ordre de tri défini dans Shopify.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign collection = s.collection
+  assign limit = s.products_to_show
+
+  assign shown = 0
+  assign product_ids = ''
+  if collection != blank
+    for product in collection.products
+      if shown >= limit
+        break
+      endif
+      assign keep = true
+      if s.filter == 'on_sale'
+        assign keep = false
+        for v in product.variants
+          if v.compare_at_price and v.compare_at_price > v.price
+            assign keep = true
+            break
+          endif
+        endfor
+      elsif s.filter == 'available'
+        assign keep = product.available
+      endif
+      if keep
+        assign shown = shown | plus: 1
+        assign product_ids = product_ids | append: product.id | append: ','
+      endif
+    endfor
+  endif
+
+  assign hide_section = false
+  if shown == 0 and s.hide_if_empty and request.design_mode == false
+    assign hide_section = true
+  endif
+  if collection == blank and request.design_mode == false
+    assign hide_section = true
+  endif
+
+  if s.layout == 'carousel'
+    assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: s.columns_desktop | append: '), (min-width: 750px) 33vw, 72vw'
+  else
+    assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: s.columns_desktop | append: '), (min-width: 750px) 33vw, 50vw'
+  endif
+-%}
+{%- unless hide_section -%}
+  <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;" aria-labelledby="Heading-{{ section.id }}">
+    <div class="page-width">
+      {%- capture view_all_url -%}{%- if collection != blank -%}{{ collection.url }}{%- endif -%}{%- endcapture -%}
+      {%- capture heading_html -%}<span id="Heading-{{ section.id }}">{{ s.heading }}</span>{%- endcapture -%}
+      {%- liquid
+        assign link_label = blank
+        if s.show_view_all and shown > 0 and s.view_all_position == 'top'
+          assign link_label = s.view_all_label
+        endif
+      -%}
+      {%- if s.layout == 'carousel' and shown > 0 -%}
+        <slider-component class="slider-wrapper">
+          <div class="section-heading">
+            <div class="section-heading__text">
+              {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+              <h2 class="section-heading__title h2">{{ heading_html }}</h2>
+              {%- if s.text != blank -%}<div class="section-heading__desc rte">{{ s.text }}</div>{%- endif -%}
+            </div>
+            <div class="slider-controls">
+              {%- if link_label != blank -%}<a href="{{ view_all_url }}" class="link-arrow" style="margin-right: 1rem; align-self: center;">{{ link_label | escape }} {% render 'icon', name: 'arrow-right', size: 18 %}</a>{%- endif -%}
+              <button type="button" class="icon-button" data-slider-prev aria-label="{{ 'general.slider.previous' | t }}" aria-controls="Slider-{{ section.id }}">{% render 'icon', name: 'chevron-left', size: 20 %}</button>
+              <button type="button" class="icon-button" data-slider-next aria-label="{{ 'general.slider.next' | t }}" aria-controls="Slider-{{ section.id }}">{% render 'icon', name: 'chevron-right', size: 20 %}</button>
+            </div>
+          </div>
+          <ul class="slider grid--products reveal" id="Slider-{{ section.id }}" role="list" data-slider-track tabindex="0" aria-label="{{ s.heading | strip_html | escape }}" style="--cols-desktop: {{ s.columns_desktop }};">
+            {%- for product in collection.products -%}
+              {%- assign pid = product.id | append: ',' -%}
+              {%- assign wrapped_ids = ',' | append: product_ids -%}
+              {%- assign needle = ',' | append: pid -%}
+              {%- if wrapped_ids contains needle -%}
+                <li>{% render 'card-product', product: product, sizes: card_sizes, section_id: section.id %}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </slider-component>
+      {%- else -%}
+        <div class="section-heading">
+          <div class="section-heading__text">
+            {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+            <h2 class="section-heading__title h2">{{ heading_html }}</h2>
+            {%- if s.text != blank -%}<div class="section-heading__desc rte">{{ s.text }}</div>{%- endif -%}
+          </div>
+          {%- if link_label != blank -%}<a href="{{ view_all_url }}" class="link-arrow">{{ link_label | escape }} {% render 'icon', name: 'arrow-right', size: 18 %}</a>{%- endif -%}
+        </div>
+
+        {%- if shown > 0 -%}
+          <ul class="grid grid--products reveal" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }};">
+            {%- for product in collection.products -%}
+              {%- assign wrapped_ids = ',' | append: product_ids -%}
+              {%- assign needle = ',' | append: product.id | append: ',' -%}
+              {%- if wrapped_ids contains needle -%}
+                <li>{% render 'card-product', product: product, sizes: card_sizes, section_id: section.id %}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- elsif collection == blank -%}
+          {%- comment -%} Éditeur de thème uniquement : aperçu clairement identifié comme exemple. {%- endcomment -%}
+          <p class="editor-notice">{{ 'sections.featured_collection.editor_notice' | t }}</p>
+          <ul class="grid grid--products" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }}; margin-top: 1rem;">
+            {%- for i in (1..s.columns_desktop) -%}
+              <li>
+                <div class="card-product">
+                  <div class="card-product__media">{{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                  <div class="card-product__info">
+                    <p class="card-product__title">{{ 'sections.featured_collection.example_product' | t }}</p>
+                  </div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <div class="empty-state">
+            {% render 'icon', name: 'sparkle', size: 32 %}
+            <p>{{ 'sections.featured_collection.empty' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">{{ 'general.continue_shopping' | t }}</a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if s.show_view_all and shown > 0 and s.view_all_position == 'bottom' -%}
+        <div class="collection-footer">
+          <a href="{{ view_all_url }}" class="button button--secondary">{{ s.view_all_label | escape }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Produits mis en avant",
+  "tag": "div",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Sélection" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Nos pépites du moment" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "select",
+      "id": "filter",
+      "label": "Produits affichés",
+      "options": [
+        { "value": "all", "label": "Tous les produits de la collection" },
+        { "value": "available", "label": "Uniquement les produits disponibles" },
+        { "value": "on_sale", "label": "Uniquement les produits en promotion" }
+      ],
+      "default": "all",
+      "info": "« En promotion » : produits ayant un prix comparatif supérieur au prix de vente, renseigné dans Shopify. Les 50 premiers produits de la collection sont analysés."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "label": "Nombre de produits",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_if_empty",
+      "label": "Masquer la section si aucun produit ne correspond",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Présentation",
+      "options": [
+        { "value": "grid", "label": "Grille" },
+        { "value": "carousel", "label": "Carrousel" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Colonnes sur ordinateur",
+      "default": 4
+    },
+    { "type": "checkbox", "id": "show_view_all", "label": "Afficher le lien « Tout voir »", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Libellé du lien", "default": "Tout voir" },
+    {
+      "type": "select",
+      "id": "view_all_position",
+      "label": "Position du lien",
+      "options": [
+        { "value": "top", "label": "À côté du titre" },
+        { "value": "bottom", "label": "Sous les produits" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "sage", "label": "Vert sauge" },
+        { "value": "dark", "label": "Vert foncé" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ],
+  "presets": [
+    { "name": "Produits mis en avant" },
+    {
+      "name": "Promotions",
+      "settings": {
+        "eyebrow": "Offres du moment",
+        "heading": "Les <em>bons plans</em> en cours",
+        "filter": "on_sale",
+        "color_scheme": "sage-light"
+      }
+    },
+    {
+      "name": "Nouveautés",
+      "settings": {
+        "eyebrow": "Fraîchement arrivés",
+        "heading": "Les nouveautés",
+        "layout": "carousel"
+      }
+    }
+  ]
+}
+{% endschema %}

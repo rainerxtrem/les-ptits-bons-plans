@@ -1,0 +1,125 @@
+{%- assign s = section.settings -%}
+{%- if section.blocks.size > 0 -%}
+  <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+    <div class="page-width">
+      {% render 'section-heading', eyebrow: s.eyebrow, heading: s.heading, text: s.text, align: 'center' %}
+      <ul class="trust reveal{% if s.style == 'bordered' %} trust--bordered{% endif %}{% if s.align == 'center' %} trust--center{% endif %}" role="list" style="--count: {{ section.blocks.size | at_most: 4 }};">
+        {%- for block in section.blocks -%}
+          <li class="trust__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}
+              <span class="trust__icon">
+                {%- if block.settings.custom_icon != blank -%}
+                  {{ block.settings.custom_icon | image_url: width: 64 | image_tag: width: 26, height: 26, alt: '', loading: 'lazy' }}
+                {%- else -%}
+                  {% render 'icon', name: block.settings.icon, size: 24 %}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+            <div>
+              <h3 class="trust__title">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}<div class="trust__text rte">{{ block.settings.text }}</div>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Engagements",
+  "tag": "div",
+  "class": "section-trust",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "N'affichez que des engagements conformes aux conditions réelles de la boutique (livraison, retours, paiement)."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "plain", "label": "Simple" },
+        { "value": "bordered", "label": "Encadré" }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement",
+      "options": [
+        { "value": "left", "label": "Icône à gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "sage", "label": "Vert sauge" },
+        { "value": "dark", "label": "Vert foncé" }
+      ],
+      "default": "white"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Engagement",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "none", "label": "Aucune" },
+            { "value": "sparkle", "label": "Étincelle (sélection)" },
+            { "value": "tag", "label": "Étiquette (prix)" },
+            { "value": "chat", "label": "Bulle (service client)" },
+            { "value": "box", "label": "Colis (commande)" },
+            { "value": "truck", "label": "Camion (livraison)" },
+            { "value": "return", "label": "Flèche retour (retours)" },
+            { "value": "shield", "label": "Bouclier (paiement sécurisé)" },
+            { "value": "card", "label": "Carte (paiement)" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "heart", "label": "Cœur" },
+            { "value": "leaf", "label": "Feuille" },
+            { "value": "clock", "label": "Horloge" },
+            { "value": "map-pin", "label": "Repère (France)" }
+          ],
+          "default": "sparkle"
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Icône personnalisée (facultative)" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Une sélection de produits" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Des articles choisis pour leur intérêt et leur rapport qualité-prix.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Engagements",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "sparkle", "title": "Une sélection de produits", "text": "<p>Des articles choisis pour leur intérêt et leur rapport qualité-prix.</p>" } },
+        { "type": "item", "settings": { "icon": "tag", "title": "Des prix avantageux", "text": "<p>Des petits prix et des bons plans à découvrir dans tout le catalogue.</p>" } },
+        { "type": "item", "settings": { "icon": "chat", "title": "Un service client accessible", "text": "<p>Une question ? Nous vous répondons depuis la page contact.</p>" } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Paiement sécurisé", "text": "<p>Le règlement s'effectue sur le module de paiement sécurisé de Shopify.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

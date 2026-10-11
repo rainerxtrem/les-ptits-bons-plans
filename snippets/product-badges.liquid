@@ -1,0 +1,57 @@
+{%- comment -%}
+  Badges calculés à partir des données Shopify (jamais inventés).
+  - Épuisé : aucune variante disponible.
+  - Promotion : au moins une variante avec prix comparatif > prix. Le pourcentage est calculé
+    sur la variante (ou sur la meilleure remise si plusieurs variantes diffèrent : « Jusqu'à −X % »).
+
+  Paramètres :
+  - product (obligatoire)
+  - variant : sur la fiche produit, la remise affichée est celle de la variante sélectionnée.
+{%- endcomment -%}
+{%- liquid
+  assign max_pct = 0
+  assign min_pct = 100
+  assign sale_count = 0
+
+  if variant
+    assign is_available = variant.available
+    assign variant_total = 1
+    if variant.compare_at_price and variant.compare_at_price > variant.price
+      assign diff = variant.compare_at_price | minus: variant.price | times: 100.0
+      assign max_pct = diff | divided_by: variant.compare_at_price | round
+      assign min_pct = max_pct
+      assign sale_count = 1
+    endif
+  else
+    assign is_available = product.available
+    assign variant_total = product.variants.size
+    for v in product.variants
+      if v.compare_at_price and v.compare_at_price > v.price
+        assign diff = v.compare_at_price | minus: v.price | times: 100.0
+        assign pct = diff | divided_by: v.compare_at_price | round
+        if pct > max_pct
+          assign max_pct = pct
+        endif
+        if pct < min_pct
+          assign min_pct = pct
+        endif
+        assign sale_count = sale_count | plus: 1
+      endif
+    endfor
+  endif
+-%}
+<div class="badges">
+  {%- if is_available == false -%}
+    <span class="badge badge--soldout">{{ 'products.product.sold_out' | t }}</span>
+  {%- elsif sale_count > 0 and max_pct >= 1 -%}
+    <span class="badge badge--sale">
+      {%- if settings.sale_badge_style == 'text' -%}
+        {{ 'products.badges.sale_text' | t }}
+      {%- elsif max_pct != min_pct or sale_count < variant_total -%}
+        {{ 'products.badges.sale_up_to' | t: percent: max_pct }}
+      {%- else -%}
+        {{ 'products.badges.sale_percent' | t: percent: max_pct }}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</div>

@@ -1,0 +1,86 @@
+{%- assign s = section.settings -%}
+{%- if section.blocks.size > 0 -%}
+  <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+    <div class="page-width">
+      {% render 'section-heading', eyebrow: s.eyebrow, heading: s.heading, text: s.text, align: s.heading_align %}
+      <ol class="steps reveal" role="list" style="--count: {{ section.blocks.size | at_most: 4 }};">
+        {%- for block in section.blocks -%}
+          <li class="step" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="step__media">
+                {% render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 33vw, 100vw', widths: '400,600,800', alt: '' %}
+              </div>
+            {%- endif -%}
+            {%- if s.show_numbers -%}
+              <span class="step__number" aria-hidden="true">{{ forloop.index }}</span>
+            {%- endif -%}
+            <h3 class="step__title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}<div class="step__text rte">{{ block.settings.text }}</div>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Étapes / colonnes",
+  "tag": "div",
+  "class": "section-steps",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Comment ça marche" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Votre demande <em>en trois étapes</em>" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alignement du titre",
+      "options": [
+        { "value": "left", "label": "À gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_numbers", "label": "Numéroter les étapes", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "sage", "label": "Vert sauge" },
+        { "value": "dark", "label": "Vert foncé" }
+      ],
+      "default": "ivory"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (facultative)" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Votre besoin" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Décrivez votre projet via le formulaire ci-dessous.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Étapes",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Votre besoin", "text": "<p>Vous décrivez votre projet : occasion, nombre de destinataires, budget indicatif.</p>" } },
+        { "type": "step", "settings": { "title": "Notre proposition", "text": "<p>Nous étudions votre demande et revenons vers vous avec une sélection adaptée.</p>" } },
+        { "type": "step", "settings": { "title": "Votre validation", "text": "<p>Vous validez la proposition ; les modalités (quantités, délais, livraison) sont confirmées ensemble.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

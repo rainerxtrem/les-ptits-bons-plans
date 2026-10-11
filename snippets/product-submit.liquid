@@ -1,0 +1,20 @@
+{%- comment -%}
+  Bouton d'ajout au panier, dont l'état reflète la variante Shopify.
+  Paramètres : product, variant, combo_exists
+{%- endcomment -%}
+{%- liquid
+  assign disabled = false
+  if combo_exists == false
+    assign disabled = true
+    assign label = 'products.product.unavailable' | t
+  elsif variant.available == false
+    assign disabled = true
+    assign label = 'products.product.sold_out' | t
+  else
+    assign label = 'products.product.add_to_cart' | t
+  endif
+-%}
+<button type="submit" name="add" class="button button--large button--full"{% if disabled %} disabled aria-disabled="true"{% endif %}>
+  <span class="button__label">{{ label }}</span>
+  <span class="spinner" aria-hidden="true"></span>
+</button>

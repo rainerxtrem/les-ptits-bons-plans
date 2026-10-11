@@ -1,0 +1,243 @@
+{%- liquid
+  assign s = section.settings
+  case s.height
+    when 'small'
+      assign h = '440px'
+      assign h_mobile = '420px'
+    when 'large'
+      assign h = '720px'
+      assign h_mobile = '600px'
+    when 'full'
+      assign h = 'calc(100vh - var(--header-height))'
+      assign h_mobile = 'calc(100svh - var(--header-height))'
+    else
+      assign h = '600px'
+      assign h_mobile = '520px'
+  endcase
+  assign has_image = false
+  if s.image != blank or s.image_mobile != blank
+    assign has_image = true
+  endif
+  assign is_first = false
+  if section.index == 1
+    assign is_first = true
+  endif
+  if s.layout == 'split'
+    assign img_sizes = '(min-width: 1200px) 55vw, (min-width: 750px) 50vw, 100vw'
+  else
+    assign img_sizes = '100vw'
+  endif
+-%}
+<section
+  class="hero hero--{{ s.layout }} hero--align-{{ s.text_align }} hero--image-{{ s.image_side }} scheme-{{ s.color_scheme }}"
+  style="--hero-h: {{ h }}; --hero-h-mobile: {{ h_mobile }}; --overlay: {{ s.overlay | divided_by: 100.0 }}; --v-align: {{ s.vertical_align }};"
+  aria-labelledby="Hero-{{ section.id }}"
+>
+  <div class="hero__grid">
+    <div class="hero__content">
+      {%- if s.layout == 'split' and s.show_decor -%}
+        <span class="hero__decor hero__decor--line" aria-hidden="true"></span>
+      {%- endif -%}
+      <div class="hero__content-inner{% if is_first == false %} reveal{% endif %}">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="h1" id="Hero-{{ section.id }}">{{ s.heading }}</h2>
+        {%- if s.text != blank -%}<div class="hero__text rte">{{ s.text }}</div>{%- endif -%}
+        {%- if s.button_label_1 != blank or s.button_label_2 != blank -%}
+          <div class="hero__buttons">
+            {%- if s.button_label_1 != blank -%}
+              <a href="{{ s.button_link_1 | default: routes.all_products_collection_url }}" class="button button--large">{{ s.button_label_1 | escape }}</a>
+            {%- endif -%}
+            {%- if s.button_label_2 != blank and s.button_link_2 != blank -%}
+              <a href="{{ s.button_link_2 }}" class="button button--secondary button--large">{{ s.button_label_2 | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="hero__media" style="--focal: {{ s.image.presentation.focal_point | default: 'center' }};">
+      {%- if s.layout == 'split' and s.show_decor -%}
+        <span class="hero__decor hero__decor--circle" aria-hidden="true"></span>
+      {%- endif -%}
+      {%- if has_image -%}
+        {%- assign desktop_img = s.image | default: s.image_mobile -%}
+        {%- assign mobile_img = s.image_mobile | default: s.image -%}
+        {%- if s.image_mobile != blank and s.image != blank -%}
+          {% render 'responsive-image', image: desktop_img, sizes: img_sizes, class: 'hero__img--desktop', priority: is_first %}
+          {% render 'responsive-image', image: mobile_img, sizes: '100vw', widths: '375,540,750,900,1100', class: 'hero__img--mobile', priority: is_first %}
+        {%- else -%}
+          {% render 'responsive-image', image: desktop_img, sizes: img_sizes, priority: is_first %}
+        {%- endif -%}
+      {%- elsif request.design_mode -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- else -%}
+        <div class="hero__brand-art" aria-hidden="true"><span>{{ shop.name | escape }}</span></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bannière d'accueil",
+  "tag": "div",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (ordinateur)",
+      "info": "Photo lifestyle ou composition de produits. 2000 px de large recommandé."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile, facultative)",
+      "info": "Format portrait conseillé (ex. 900 × 1100 px)."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Disposition",
+      "options": [
+        { "value": "split", "label": "Texte et image côte à côte" },
+        { "value": "overlay", "label": "Texte sur l'image" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Côté de l'image (côte à côte)",
+      "options": [
+        { "value": "right", "label": "À droite" },
+        { "value": "left", "label": "À gauche" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Hauteur",
+      "options": [
+        { "value": "small", "label": "Petite" },
+        { "value": "medium", "label": "Moyenne" },
+        { "value": "large", "label": "Grande" },
+        { "value": "full", "label": "Plein écran" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignement du texte",
+      "options": [
+        { "value": "left", "label": "À gauche" },
+        { "value": "center", "label": "Centré" },
+        { "value": "right", "label": "À droite (texte sur l'image)" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Position verticale du texte (texte sur l'image)",
+      "options": [
+        { "value": "flex-start", "label": "En haut" },
+        { "value": "center", "label": "Au centre" },
+        { "value": "flex-end", "label": "En bas" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Assombrissement de l'image (texte sur l'image)",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "sage", "label": "Vert sauge" },
+        { "value": "dark", "label": "Vert foncé" }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decor",
+      "label": "Décor discret aux couleurs de la marque",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Surtitre",
+      "default": "Vos envies, nos bons plans"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "info": "Mettez un mot en italique pour l'accentuer en vert sauge.",
+      "default": "Les bonnes trouvailles <em>n'attendent que vous.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Découvrez une sélection de produits à prix malins, pour vous faire plaisir et dénicher de belles surprises.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Bouton principal",
+      "default": "Explorer la boutique"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Lien du bouton principal",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Bouton secondaire",
+      "default": "Voir les offres du moment"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Lien du bouton secondaire",
+      "info": "Le bouton n'est affiché que si un lien est choisi (ex. collection « Les bons plans »)."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bannière d'accueil"
+    }
+  ]
+}
+{% endschema %}

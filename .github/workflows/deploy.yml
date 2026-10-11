@@ -1,0 +1,39 @@
+# Déploiement manuel vers un thème Shopify (onglet Actions > « Déployer sur Shopify » > Run workflow).
+# Secrets requis (Settings > Secrets and variables > Actions) :
+#   SHOPIFY_CLI_THEME_TOKEN : mot de passe généré par l'application « Theme Access » de Shopify
+#   SHOPIFY_FLAG_STORE      : 10vqni-hy.myshopify.com
+# Le thème publié n'est jamais remplacé sans l'option explicite « allow_live ».
+name: Déployer sur Shopify
+
+on:
+  workflow_dispatch:
+    inputs:
+      theme:
+        description: "ID ou nom du thème cible (laisser vide pour créer un thème non publié)"
+        required: false
+        default: ""
+      allow_live:
+        description: "Autoriser l'écriture sur le thème publié"
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+      SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_FLAG_STORE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g @shopify/cli@3
+      - run: shopify theme check --path . --fail-level error
+      - name: Envoyer le thème
+        run: |
+          if [ -n "${{ inputs.theme }}" ]; then
+            shopify theme push --path . --theme "${{ inputs.theme }}" ${{ inputs.allow_live && '--allow-live' || '' }} --nodelete
+          else
+            shopify theme push --path . --unpublished --theme "Les p'tits bons plans" --json
+          fi

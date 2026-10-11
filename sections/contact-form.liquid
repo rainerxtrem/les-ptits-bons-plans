@@ -1,0 +1,197 @@
+{%- comment -%}
+  Formulaire de contact natif Shopify ({% form 'contact' %}).
+  Les messages sont envoyés à l'adresse e-mail de l'expéditeur définie dans Shopify
+  (Paramètres > Notifications). Mode « professionnel » : champs dédiés aux cadeaux d'entreprise.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign form_id = 'ContactForm-' | append: section.id
+  assign is_business = false
+  if s.mode == 'business'
+    assign is_business = true
+  endif
+  assign subjects = s.subjects | newline_to_br | split: '<br />'
+  assign has_info = false
+  if s.show_info
+    if settings.contact_email != blank or settings.contact_phone != blank or settings.contact_address != blank or settings.contact_hours != blank or s.info_text != blank
+      assign has_info = true
+    endif
+  endif
+-%}
+<section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;" id="{{ form_id }}-section">
+  <div class="page-width">
+    <div class="contact-layout{% unless has_info %} contact-layout--single{% endunless %}">
+      {%- if has_info -%}
+        <aside class="contact-card">
+          {%- if s.info_heading != blank -%}<h2 class="h3">{{ s.info_heading | escape }}</h2>{%- endif -%}
+          {%- if s.info_text != blank -%}<div class="rte text-muted">{{ s.info_text }}</div>{%- endif -%}
+          <ul class="contact-card__list" role="list">
+            {%- if settings.contact_email != blank -%}
+              <li>{% render 'icon', name: 'mail', size: 20 %}<a href="mailto:{{ settings.contact_email | escape }}">{{ settings.contact_email | escape }}</a></li>
+            {%- endif -%}
+            {%- if settings.contact_phone != blank -%}
+              <li>{% render 'icon', name: 'phone', size: 20 %}<a href="tel:{{ settings.contact_phone | remove: ' ' | remove: '.' | escape }}">{{ settings.contact_phone | escape }}</a></li>
+            {%- endif -%}
+            {%- if settings.contact_hours != blank -%}
+              <li>{% render 'icon', name: 'clock', size: 20 %}<span>{{ settings.contact_hours | escape }}</span></li>
+            {%- endif -%}
+            {%- if settings.contact_address != blank -%}
+              <li>{% render 'icon', name: 'map-pin', size: 20 %}<span>{{ settings.contact_address | escape | newline_to_br }}</span></li>
+            {%- endif -%}
+          </ul>
+        </aside>
+      {%- endif -%}
+
+      <div>
+        {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<div class="rte text-muted" style="margin-bottom: 1.5rem;">{{ s.text }}</div>{%- endif -%}
+
+        {%- form 'contact', id: form_id, class: 'contact-form', novalidate: 'novalidate', data-validate: '' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-message form-message--success" role="status" tabindex="-1" autofocus>
+              {% render 'icon', name: 'check', size: 20 %}
+              <span>{%- if is_business -%}{{ 'contact.form.success_business' | t }}{%- else -%}{{ 'contact.form.success' | t }}{%- endif -%}</span>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="form-message form-message--error" role="alert" tabindex="-1" autofocus>
+              {% render 'icon', name: 'alert', size: 20 %}
+              <div>
+                <p style="margin: 0 0 .25rem;"><strong>{{ 'contact.form.error_heading' | t }}</strong></p>
+                {{ form.errors | default_errors }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if is_business -%}
+            <input type="hidden" name="contact[Type de demande]" value="{{ 'contact.form.business_type' | t }}">
+          {%- endif -%}
+
+          <div class="form-grid form-grid--2">
+            {%- if is_business -%}
+              <div class="field field--full">
+                <label class="field__label" for="{{ form_id }}-company">{{ 'contact.form.company' | t }} <span class="required" aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="{{ form_id }}-company" name="contact[Entreprise]" autocomplete="organization" required aria-required="true" aria-describedby="{{ form_id }}-company-error" value="{{ form['Entreprise'] }}">
+                <p class="field__error" id="{{ form_id }}-company-error" hidden>{{ 'contact.form.required' | t }}</p>
+              </div>
+            {%- endif -%}
+            <div class="field">
+              <label class="field__label" for="{{ form_id }}-name">{{ 'contact.form.name' | t }} <span class="required" aria-hidden="true">*</span></label>
+              <input class="field__input" type="text" id="{{ form_id }}-name" name="contact[Nom]" autocomplete="name" required aria-required="true" aria-describedby="{{ form_id }}-name-error" value="{% if form['Nom'] %}{{ form['Nom'] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              <p class="field__error" id="{{ form_id }}-name-error" hidden>{{ 'contact.form.required' | t }}</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="{{ form_id }}-email">{{ 'contact.form.email' | t }} <span class="required" aria-hidden="true">*</span></label>
+              <input class="field__input" type="email" id="{{ form_id }}-email" name="contact[email]" autocomplete="email" spellcheck="false" autocapitalize="off" required aria-required="true" aria-describedby="{{ form_id }}-email-error"{% if form.errors contains 'email' %} aria-invalid="true"{% endif %} value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+              <p class="field__error" id="{{ form_id }}-email-error" hidden>{{ 'contact.form.email_invalid' | t }}</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="{{ form_id }}-phone">{{ 'contact.form.phone' | t }}{% unless is_business %} <span class="text-muted">({{ 'contact.form.optional' | t }})</span>{% endunless %}</label>
+              <input class="field__input" type="tel" id="{{ form_id }}-phone" name="contact[Téléphone]" autocomplete="tel" pattern="[0-9\-\+\s\.\(\)]*" value="{{ form['Téléphone'] }}">
+            </div>
+            {%- if is_business -%}
+              <div class="field">
+                <label class="field__label" for="{{ form_id }}-qty">{{ 'contact.form.quantity' | t }}</label>
+                <input class="field__input" type="text" id="{{ form_id }}-qty" name="contact[Nombre de destinataires]" inputmode="numeric" value="{{ form['Nombre de destinataires'] }}">
+              </div>
+              <div class="field">
+                <label class="field__label" for="{{ form_id }}-budget">{{ 'contact.form.budget' | t }}</label>
+                <input class="field__input" type="text" id="{{ form_id }}-budget" name="contact[Budget indicatif]" value="{{ form['Budget indicatif'] }}">
+              </div>
+              <div class="field">
+                <label class="field__label" for="{{ form_id }}-date">{{ 'contact.form.date' | t }}</label>
+                <input class="field__input" type="date" id="{{ form_id }}-date" name="contact[Date souhaitée]" value="{{ form['Date souhaitée'] }}">
+              </div>
+            {%- else -%}
+              <div class="field">
+                <label class="field__label" for="{{ form_id }}-subject">{{ 'contact.form.subject' | t }} <span class="required" aria-hidden="true">*</span></label>
+                {%- if subjects.size > 1 or subjects.first != blank -%}
+                  <div class="select" style="display: flex;">
+                    <select class="select__input field__input" id="{{ form_id }}-subject" name="contact[Sujet]" required aria-required="true" aria-describedby="{{ form_id }}-subject-error" style="width: 100%;">
+                      <option value="">{{ 'contact.form.subject_placeholder' | t }}</option>
+                      {%- for subject in subjects -%}
+                        {%- assign subject_clean = subject | strip -%}
+                        {%- if subject_clean != blank -%}
+                          <option value="{{ subject_clean | escape }}"{% if form['Sujet'] == subject_clean %} selected{% endif %}>{{ subject_clean | escape }}</option>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon', name: 'chevron-down', size: 16 %}
+                  </div>
+                {%- else -%}
+                  <input class="field__input" type="text" id="{{ form_id }}-subject" name="contact[Sujet]" required aria-required="true" aria-describedby="{{ form_id }}-subject-error" value="{{ form['Sujet'] }}">
+                {%- endif -%}
+                <p class="field__error" id="{{ form_id }}-subject-error" hidden>{{ 'contact.form.required' | t }}</p>
+              </div>
+            {%- endif -%}
+            <div class="field field--full">
+              <label class="field__label" for="{{ form_id }}-message">{%- if is_business -%}{{ 'contact.form.project' | t }}{%- else -%}{{ 'contact.form.message' | t }}{%- endif -%} <span class="required" aria-hidden="true">*</span></label>
+              <textarea class="field__input" id="{{ form_id }}-message" name="contact[body]" rows="6" required aria-required="true" aria-describedby="{{ form_id }}-message-error">{{ form.body }}</textarea>
+              <p class="field__error" id="{{ form_id }}-message-error" hidden>{{ 'contact.form.required' | t }}</p>
+            </div>
+          </div>
+          <p class="contact-form__note">
+            {{ 'contact.form.required_note' | t }}
+            {%- if shop.privacy_policy.body != blank %} {{ 'contact.form.privacy_html' | t: link: shop.privacy_policy.url }}{%- endif -%}
+          </p>
+          <button type="submit" class="button button--large">{%- if is_business -%}{{ 'contact.form.send_business' | t }}{%- else -%}{{ 'contact.form.send' | t }}{%- endif -%}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulaire de contact",
+  "tag": "div",
+  "class": "section-contact-form",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Type de formulaire",
+      "options": [
+        { "value": "standard", "label": "Contact" },
+        { "value": "business", "label": "Demande professionnelle (cadeaux d'entreprise)" }
+      ],
+      "default": "standard"
+    },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Écrivez-nous" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Une question sur un produit ou une commande ? Remplissez le formulaire, nous vous répondrons par e-mail.</p>" },
+    {
+      "type": "textarea",
+      "id": "subjects",
+      "label": "Sujets proposés (formulaire Contact)",
+      "info": "Un sujet par ligne. Laissez vide pour un champ libre.",
+      "default": "Question sur un produit\nSuivi de ma commande\nRetour ou échange\nAutre demande"
+    },
+    { "type": "checkbox", "id": "show_info", "label": "Afficher les coordonnées", "info": "Coordonnées renseignées dans Réglages du thème > Coordonnées.", "default": true },
+    { "type": "text", "id": "info_heading", "label": "Titre des coordonnées", "default": "Nous joindre" },
+    { "type": "richtext", "id": "info_text", "label": "Texte des coordonnées" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 88 }
+  ],
+  "presets": [
+    { "name": "Formulaire de contact" },
+    {
+      "name": "Demande professionnelle",
+      "settings": {
+        "mode": "business",
+        "heading": "Parlons de votre projet",
+        "text": "<p>Décrivez votre besoin : nous revenons vers vous pour étudier ensemble une proposition adaptée.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

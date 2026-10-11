@@ -1,0 +1,41 @@
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Boutique",
+            "menu": "main-menu"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Service client",
+            "menu": "footer"
+          }
+        },
+        "newsletter-1": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Les bons plans par e-mail",
+            "text": "<p>Nouveautés et sélections du moment, directement dans votre boîte mail.</p>"
+          }
+        }
+      },
+      "block_order": ["menu-1", "menu-2", "newsletter-1"],
+      "settings": {
+        "color_scheme": "dark",
+        "show_contact": true,
+        "show_social": true,
+        "show_localization": true,
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

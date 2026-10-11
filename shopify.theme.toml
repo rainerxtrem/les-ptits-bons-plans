@@ -1,0 +1,9 @@
+# Environnements Shopify CLI — utilisation : shopify theme dev -e development
+# Aucune clé secrète ici : l'authentification se fait par connexion navigateur (shopify auth)
+# ou par la variable d'environnement SHOPIFY_CLI_THEME_TOKEN (application Theme Access).
+
+[environments.development]
+store = "10vqni-hy.myshopify.com"
+
+[environments.production]
+store = "10vqni-hy.myshopify.com"

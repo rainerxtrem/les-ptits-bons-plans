@@ -1,0 +1,4 @@
+<span class="cart-bubble{% if cart.item_count == 0 %} cart-bubble--empty{% endif %}" data-cart-bubble>
+  <span aria-hidden="true">{%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}99+{%- endif -%}</span>
+  <span class="visually-hidden">{{ 'cart.general.item_count' | t: count: cart.item_count }}</span>
+</span>

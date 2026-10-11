@@ -1,0 +1,66 @@
+{%- assign s = section.settings -%}
+<section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;" aria-labelledby="Newsletter-{{ section.id }}">
+  <div class="page-width">
+    <div class="newsletter reveal{% if s.boxed %} newsletter--boxed{% endif %}{% if s.align == 'center' %} newsletter--center{% endif %}">
+      <div class="newsletter__content">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="h2" id="Newsletter-{{ section.id }}">{{ s.heading }}</h2>
+        {%- if s.text != blank -%}<div class="rte">{{ s.text }}</div>{%- endif -%}
+      </div>
+      {%- assign form_id = 'Newsletter-form-' | append: section.id -%}
+      {% render 'newsletter-form', form_id: form_id, button_label: s.button_label, consent_text: s.consent %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "div",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Les inscrits sont enregistrés comme clients Shopify avec l'acceptation du marketing par e-mail (Clients > Abonnés)."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Newsletter" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Ne manquez plus <em>aucune pépite</em>" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Recevez nos nouveautés et nos sélections du moment, directement dans votre boîte mail.</p>" },
+    { "type": "text", "id": "button_label", "label": "Libellé du bouton", "default": "Je m'inscris" },
+    {
+      "type": "richtext",
+      "id": "consent",
+      "label": "Mention de consentement",
+      "default": "<p>En vous inscrivant, vous acceptez de recevoir nos e-mails. Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque message.</p>"
+    },
+    { "type": "checkbox", "id": "boxed", "label": "Encadré", "default": true },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Disposition",
+      "options": [
+        { "value": "split", "label": "Texte et formulaire côte à côte" },
+        { "value": "center", "label": "Centrée" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "sage", "label": "Vert sauge" },
+        { "value": "dark", "label": "Vert foncé" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 88 }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

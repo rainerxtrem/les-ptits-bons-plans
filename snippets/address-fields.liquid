@@ -1,0 +1,26 @@
+{%- comment -%} Champs d'adresse client. Paramètres : form, prefix {%- endcomment -%}
+<div class="form-grid form-grid--2" style="margin-top: 1rem;">
+  <div class="field"><label class="field__label" for="AddrFirst-{{ prefix }}">{{ 'customer.register.first_name' | t }}</label><input class="field__input" id="AddrFirst-{{ prefix }}" name="address[first_name]" autocomplete="given-name" value="{{ form.first_name }}"></div>
+  <div class="field"><label class="field__label" for="AddrLast-{{ prefix }}">{{ 'customer.register.last_name' | t }}</label><input class="field__input" id="AddrLast-{{ prefix }}" name="address[last_name]" autocomplete="family-name" value="{{ form.last_name }}"></div>
+  <div class="field field--full"><label class="field__label" for="AddrCompany-{{ prefix }}">{{ 'contact.form.company' | t }}</label><input class="field__input" id="AddrCompany-{{ prefix }}" name="address[company]" autocomplete="organization" value="{{ form.company }}"></div>
+  <div class="field field--full"><label class="field__label" for="Addr1-{{ prefix }}">{{ 'customer.addresses.address1' | t }}</label><input class="field__input" id="Addr1-{{ prefix }}" name="address[address1]" autocomplete="address-line1" value="{{ form.address1 }}"></div>
+  <div class="field field--full"><label class="field__label" for="Addr2-{{ prefix }}">{{ 'customer.addresses.address2' | t }}</label><input class="field__input" id="Addr2-{{ prefix }}" name="address[address2]" autocomplete="address-line2" value="{{ form.address2 }}"></div>
+  <div class="field"><label class="field__label" for="AddrZip-{{ prefix }}">{{ 'customer.addresses.zip' | t }}</label><input class="field__input" id="AddrZip-{{ prefix }}" name="address[zip]" autocomplete="postal-code" value="{{ form.zip }}"></div>
+  <div class="field"><label class="field__label" for="AddrCity-{{ prefix }}">{{ 'customer.addresses.city' | t }}</label><input class="field__input" id="AddrCity-{{ prefix }}" name="address[city]" autocomplete="address-level2" value="{{ form.city }}"></div>
+  <div class="field">
+    <label class="field__label" for="AddrCountry-{{ prefix }}">{{ 'customer.addresses.country' | t }}</label>
+    <select class="field__input" id="AddrCountry-{{ prefix }}" name="address[country]" autocomplete="country" data-default="{{ form.country }}">{{ all_country_option_tags }}</select>
+  </div>
+  <div class="field"><label class="field__label" for="AddrProvince-{{ prefix }}">{{ 'customer.addresses.province' | t }}</label><input class="field__input" id="AddrProvince-{{ prefix }}" name="address[province]" autocomplete="address-level1" value="{{ form.province }}"></div>
+  <div class="field field--full"><label class="field__label" for="AddrPhone-{{ prefix }}">{{ 'contact.form.phone' | t }}</label><input class="field__input" type="tel" id="AddrPhone-{{ prefix }}" name="address[phone]" autocomplete="tel" value="{{ form.phone }}"></div>
+</div>
+<div class="checkbox" style="margin-bottom: 1rem;">
+  <input type="checkbox" class="checkbox__input" id="AddrDefault-{{ prefix }}" name="address[default]" value="1"{% if form.set_as_default_checkbox %} checked{% endif %}>
+  <label for="AddrDefault-{{ prefix }}" class="checkbox__label"><span class="checkbox__box" aria-hidden="true">{% render 'icon', name: 'check', size: 14 %}</span>{{ 'customer.addresses.set_default' | t }}</label>
+</div>
+<script>
+  (function () {
+    var select = document.getElementById('AddrCountry-{{ prefix }}');
+    if (select && select.dataset.default) select.value = select.dataset.default;
+  })();
+</script>

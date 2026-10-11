@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "intro": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "right",
+        "ratio": "landscape",
+        "wide_media": true,
+        "show_accent": true,
+        "eyebrow": "Cadeaux d'entreprise",
+        "heading": "Des cadeaux qui font <em>plaisir</em> à vos équipes et clients",
+        "text": "<p>Vous souhaitez offrir une sélection de produits à vos collaborateurs, clients ou partenaires ? Présentez-nous votre projet : nous l'étudions avec vous.</p>",
+        "color_scheme": "ivory",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Votre besoin",
+            "text": "<p>Vous décrivez votre projet : occasion, nombre de destinataires, budget indicatif.</p>"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Notre proposition",
+            "text": "<p>Nous étudions votre demande et revenons vers vous avec une sélection adaptée.</p>"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Votre validation",
+            "text": "<p>Vous validez la proposition ; les modalités (quantités, délais, livraison) sont confirmées ensemble.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "Comment ça marche",
+        "heading": "Votre demande <em>en trois étapes</em>",
+        "heading_align": "center",
+        "show_numbers": true,
+        "color_scheme": "offwhite",
+        "padding_top": 80,
+        "padding_bottom": 72
+      }
+    },
+    "gallery": {
+      "type": "image-gallery",
+      "blocks": {
+        "i1": {
+          "type": "image",
+          "settings": {}
+        },
+        "i2": {
+          "type": "image",
+          "settings": {}
+        },
+        "i3": {
+          "type": "image",
+          "settings": {}
+        },
+        "i4": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4"
+      ],
+      "settings": {
+        "eyebrow": "Inspirations",
+        "heading": "Quelques idées de sélections",
+        "columns_desktop": 4,
+        "ratio": "portrait",
+        "color_scheme": "white",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "mode": "business",
+        "heading": "Parlons de votre projet",
+        "text": "<p>Décrivez votre besoin : nous revenons vers vous pour étudier ensemble une proposition adaptée.</p>",
+        "show_info": true,
+        "info_heading": "Contact professionnel",
+        "color_scheme": "offwhite",
+        "padding_top": 72,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "steps",
+    "gallery",
+    "form"
+  ]
+}

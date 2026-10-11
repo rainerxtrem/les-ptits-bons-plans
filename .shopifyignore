@@ -1,0 +1,7 @@
+# Fichiers du dépôt qui ne font pas partie du thème
+README.md
+docs/*
+.github/*
+shopify.theme.toml
+.gitignore
+.theme-check.yml

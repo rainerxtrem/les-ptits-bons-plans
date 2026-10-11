@@ -1,0 +1,43 @@
+{%- assign s = section.settings -%}
+<section class="section cart-page scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <h1 class="h2">{{ 'cart.general.title' | t }}</h1>
+    <div data-main-cart data-section-id="{{ section.id }}">
+      <div class="{% if cart.item_count > 0 %}cart-page__layout{% endif %}">
+        {% render 'cart-contents', context: 'page' %}
+      </div>
+    </div>
+    <noscript>
+      <form action="{{ routes.cart_url }}" method="post" id="CartUpdateForm" style="margin-top: 1rem;">
+        <p class="small">{{ 'cart.general.noscript' | t }}</p>
+        <button type="submit" name="update" class="button button--secondary">{{ 'cart.general.update' | t }}</button>
+      </form>
+    </noscript>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Panier",
+  "tag": "div",
+  "class": "section-main-cart",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Note de commande, code de réduction et collection suggérée : Réglages du thème > Panier."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ]
+}
+{% endschema %}

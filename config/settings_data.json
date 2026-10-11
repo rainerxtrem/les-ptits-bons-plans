@@ -1,0 +1,23 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_sage": "#A8B5A2",
+      "color_sage_dark": "#6E7F73",
+      "color_sage_light": "#EDF0EA",
+      "color_gold": "#C6A75E",
+      "color_gold_text": "#84662A",
+      "color_ivory": "#F7F5F0",
+      "color_offwhite": "#FCFBF8",
+      "color_text": "#2E2E2E",
+      "color_text_muted": "#5E5E5A",
+      "color_border": "#E2DDD2",
+      "color_button": "#5B6C60",
+      "color_button_text": "#FFFFFF",
+      "color_sale": "#B04A3F",
+      "color_success": "#3F6B4F",
+      "color_footer": "#36433A",
+      "cart_type": "drawer"
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{%- liquid
+  assign cols = section.blocks.size
+  if cols > 4
+    assign cols = 4
+  endif
+  if cols < 1
+    assign cols = 1
+  endif
+-%}
+<footer class="footer scheme-{{ section.settings.color_scheme }}" style="--footer-cols: {{ cols }};">
+  <div class="page-width">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="{{ routes.root_url }}" class="footer__logo">
+          {%- assign footer_logo = settings.logo_inverse | default: settings.logo -%}
+          {%- if section.settings.color_scheme != 'dark' -%}{%- assign footer_logo = settings.logo -%}{%- endif -%}
+          {%- if footer_logo != blank -%}
+            {{ footer_logo | image_url: width: 440 | image_tag: loading: 'lazy', widths: '220,440', sizes: '220px', alt: shop.name }}
+          {%- else -%}
+            <span class="footer__logo-text">{{ shop.name | escape }}</span>
+          {%- endif -%}
+        </a>
+        {%- if section.settings.about != blank -%}
+          <div class="footer__about rte">{{ section.settings.about }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.show_contact -%}
+          <ul class="footer__contact" role="list">
+            {%- if settings.contact_email != blank -%}
+              <li>{% render 'icon', name: 'mail', size: 18 %}<a href="mailto:{{ settings.contact_email | escape }}">{{ settings.contact_email | escape }}</a></li>
+            {%- endif -%}
+            {%- if settings.contact_phone != blank -%}
+              <li>{% render 'icon', name: 'phone', size: 18 %}<a href="tel:{{ settings.contact_phone | remove: ' ' | remove: '.' | escape }}">{{ settings.contact_phone | escape }}</a></li>
+            {%- endif -%}
+            {%- if settings.contact_hours != blank -%}
+              <li>{% render 'icon', name: 'clock', size: 18 %}<span>{{ settings.contact_hours | escape }}</span></li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.show_social -%}
+          {% render 'social-icons' %}
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            {%- assign menu = linklists[block.settings.menu] -%}
+            <details class="footer__column" open {{ block.shopify_attributes }}>
+              <summary>
+                <h2 class="footer__heading">{{ block.settings.heading | default: menu.title | escape }}</h2>
+                {% render 'icon', name: 'chevron-down', size: 16 %}
+              </summary>
+              {%- if menu.links.size > 0 -%}
+                <ul class="footer__links" role="list">
+                  {%- for link in menu.links -%}
+                    <li><a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- elsif request.design_mode -%}
+                <p class="footer__links text-muted">{{ 'sections.footer.choose_menu' | t }}</p>
+              {%- endif -%}
+            </details>
+          {%- when 'text' -%}
+            <details class="footer__column" open {{ block.shopify_attributes }}>
+              <summary>
+                <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+                {% render 'icon', name: 'chevron-down', size: 16 %}
+              </summary>
+              <div class="footer__links rte">{{ block.settings.text }}</div>
+            </details>
+          {%- when 'newsletter' -%}
+            <div class="footer__newsletter" {{ block.shopify_attributes }}>
+              <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+              {%- if block.settings.text != blank -%}<div class="footer__about rte" style="margin-top: .75rem;">{{ block.settings.text }}</div>{%- endif -%}
+              {% render 'newsletter-form', form_id: 'FooterNewsletter', compact: true %}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <div>
+        <p style="margin: 0 0 .5rem;">&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}</p>
+        {%- liquid
+          assign policies = shop.policies
+          assign legal_menu = linklists[section.settings.legal_menu]
+        -%}
+        <ul class="footer__legal" role="list">
+          {%- if legal_menu.links.size > 0 -%}
+            {%- for link in legal_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for policy in policies -%}
+              {%- if policy.body != blank -%}
+                <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </div>
+
+      {%- if section.settings.show_localization -%}
+        {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+          {%- form 'localization', class: 'footer__localization' -%}
+            {%- if localization.available_countries.size > 1 -%}
+              <label for="FooterCountry" class="visually-hidden">{{ 'sections.footer.country' | t }}</label>
+              <div class="select">
+                <select name="country_code" id="FooterCountry" class="select__input" data-localization-select>
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon', name: 'chevron-down', size: 14 %}
+              </div>
+            {%- endif -%}
+            {%- if localization.available_languages.size > 1 -%}
+              <label for="FooterLanguage" class="visually-hidden">{{ 'sections.footer.language' | t }}</label>
+              <div class="select">
+                <select name="locale_code" id="FooterLanguage" class="select__input" data-localization-select>
+                  {%- for language in localization.available_languages -%}
+                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon', name: 'chevron-down', size: 14 %}
+              </div>
+            {%- endif -%}
+            <noscript><button type="submit" class="button button--small">{{ 'sections.footer.update' | t }}</button></noscript>
+          {%- endform -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <div>
+          <span class="visually-hidden">{{ 'sections.footer.payment_methods' | t }}</span>
+          <ul class="footer__payments" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "tag": "div",
+  "class": "footer-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "dark", "label": "Vert foncé" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "richtext",
+      "id": "about",
+      "label": "Présentation de la boutique",
+      "default": "<p>Une sélection de produits à prix malins, pour se faire plaisir et dénicher de belles trouvailles.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Afficher les coordonnées",
+      "info": "Renseignées dans Réglages du thème > Coordonnées.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Afficher les réseaux sociaux",
+      "info": "Liens renseignés dans Réglages du thème > Réseaux sociaux.",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Menu des informations légales",
+      "info": "Facultatif. À défaut, les politiques renseignées dans Shopify (CGV, confidentialité, remboursement, expédition, mentions légales) sont listées automatiquement."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_localization",
+      "label": "Sélecteurs de pays et de langue",
+      "info": "Affichés uniquement si plusieurs pays ou langues sont activés dans Shopify Markets.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Afficher les moyens de paiement",
+      "info": "Les icônes reflètent les moyens de paiement réellement activés dans Shopify.",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Boutique" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Service client" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Une question sur un produit ou une commande ? Écrivez-nous depuis la page contact.</p>" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Les bons plans par e-mail" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Nouveautés et sélections du moment, directement dans votre boîte mail.</p>" }
+      ]
+    }
+  ],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

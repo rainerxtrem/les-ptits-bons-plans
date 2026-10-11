@@ -1,0 +1,74 @@
+{%- assign s = section.settings -%}
+<div class="page-header page-header--center scheme-ivory">
+  <div class="page-width">
+    {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+    <h1 class="page-header__title">{{ s.title | default: page_title | escape }}</h1>
+  </div>
+</div>
+<section class="section scheme-offwhite" style="--pad-top: 48px; --pad-bottom: 72px;">
+  <div class="page-width">
+    {%- paginate collections by 24 -%}
+      {%- liquid
+        if s.sort == 'alphabetical'
+          assign list = collections | sort_natural: 'title'
+        elsif s.sort == 'products_high'
+          assign list = collections | sort: 'all_products_count' | reverse
+        else
+          assign list = collections
+        endif
+      -%}
+      {%- if list.size > 0 -%}
+        <ul class="grid" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }}; --ratio: 4 / 5;">
+          {%- for collection in list -%}
+            <li>
+              <a href="{{ collection.url }}" class="category-card">
+                <div class="category-card__media">
+                  {%- assign image = collection.featured_image -%}
+                  {%- if image -%}
+                    {% render 'responsive-image', image: image, sizes: '(min-width: 990px) 25vw, 50vw', widths: '300,450,600,800', alt: '' %}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="category-card__body">
+                  <div>
+                    <h2 class="category-card__title">{{ collection.title | escape }}</h2>
+                    <p class="category-card__text">{{ 'products.facets.product_count' | t: count: collection.all_products_count }}</p>
+                  </div>
+                  <span class="category-card__arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right', size: 16 %}</span>
+                </div>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {% render 'pagination', paginate: paginate %}
+      {%- else -%}
+        <div class="empty-state"><p>{{ 'collections.empty_text' | t }}</p></div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Liste des collections",
+  "tag": "div",
+  "class": "section-list-collections",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Catalogue" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Toutes nos catégories" },
+    {
+      "type": "select",
+      "id": "sort",
+      "label": "Ordre",
+      "options": [
+        { "value": "alphabetical", "label": "Alphabétique" },
+        { "value": "products_high", "label": "Nombre de produits décroissant" },
+        { "value": "default", "label": "Ordre de Shopify" }
+      ],
+      "default": "alphabetical"
+    },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Colonnes sur ordinateur", "default": 4 }
+  ]
+}
+{% endschema %}

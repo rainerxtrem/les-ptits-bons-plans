@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "eyebrow": "Catalogue",
+        "title": "Toutes nos catégories",
+        "sort": "alphabetical",
+        "columns_desktop": 4
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

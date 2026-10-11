@@ -1,0 +1,270 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "layout": "split",
+        "image_side": "right",
+        "height": "medium",
+        "text_align": "left",
+        "vertical_align": "center",
+        "overlay": 30,
+        "color_scheme": "ivory",
+        "show_decor": true,
+        "eyebrow": "Vos envies, nos bons plans",
+        "heading": "Les bonnes trouvailles <em>n'attendent que vous.</em>",
+        "text": "<p>Découvrez une sélection de produits à prix malins, pour vous faire plaisir et dénicher de belles surprises.</p>",
+        "button_label_1": "Explorer la boutique",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Voir les offres du moment"
+      }
+    },
+    "categories": {
+      "type": "category-grid",
+      "blocks": {
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "title": "Maison",
+            "text": "Petits prix pour un intérieur chaleureux"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "title": "Accessoires",
+            "text": "Les essentiels du quotidien"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "title": "Loisirs",
+            "text": "De quoi se faire plaisir"
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "title": "Idées cadeaux",
+            "text": "Pour faire plaisir sans se ruiner"
+          }
+        }
+      },
+      "block_order": [
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4"
+      ],
+      "settings": {
+        "eyebrow": "Explorer",
+        "heading": "Trouvez votre <em>bon plan</em>",
+        "heading_align": "left",
+        "link_label": "Toutes les catégories",
+        "link_url": "shopify://collections",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "card_style": "below",
+        "ratio": "portrait",
+        "color_scheme": "offwhite",
+        "padding_top": 80,
+        "padding_bottom": 64
+      }
+    },
+    "pepites": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Sélection",
+        "heading": "Nos <em>pépites</em> du moment",
+        "filter": "all",
+        "products_to_show": 8,
+        "hide_if_empty": true,
+        "layout": "grid",
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "view_all_label": "Voir toute la sélection",
+        "view_all_position": "top",
+        "color_scheme": "white",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "editorial": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "left",
+        "ratio": "portrait",
+        "wide_media": false,
+        "show_accent": true,
+        "eyebrow": "Notre esprit",
+        "heading": "Le plaisir des <em>bonnes découvertes.</em>",
+        "text": "<p>Une boutique pensée pour dénicher des produits intéressants, découvrir de nouvelles idées et profiter de prix avantageux.</p>",
+        "button_label": "Découvrir la boutique",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "ivory",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "nouveautes": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Fraîchement arrivés",
+        "heading": "Les nouveautés",
+        "filter": "available",
+        "products_to_show": 10,
+        "hide_if_empty": true,
+        "layout": "carousel",
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "view_all_label": "Tout voir",
+        "view_all_position": "top",
+        "color_scheme": "offwhite",
+        "padding_top": 80,
+        "padding_bottom": 72
+      }
+    },
+    "promotions": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Offres du moment",
+        "heading": "Les <em>bons plans</em> en cours",
+        "text": "<p>Des produits dont le prix est actuellement réduit par rapport à leur prix habituel.</p>",
+        "filter": "on_sale",
+        "products_to_show": 8,
+        "hide_if_empty": true,
+        "layout": "grid",
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "view_all_label": "Voir tous les bons plans",
+        "view_all_position": "bottom",
+        "color_scheme": "sage-light",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "engagements": {
+      "type": "trust-bar",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Une sélection de produits",
+            "text": "<p>Des articles choisis pour leur intérêt et leur rapport qualité-prix.</p>"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "icon": "tag",
+            "title": "Des prix avantageux",
+            "text": "<p>Des petits prix et des bons plans à découvrir dans tout le catalogue.</p>"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "icon": "chat",
+            "title": "Un service client accessible",
+            "text": "<p>Une question ? Nous vous répondons depuis la page contact.</p>"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Paiement sécurisé",
+            "text": "<p>Le règlement s'effectue sur le module de paiement sécurisé de Shopify.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4"
+      ],
+      "settings": {
+        "style": "plain",
+        "align": "left",
+        "color_scheme": "white",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "saison": {
+      "type": "seasonal-selection",
+      "blocks": {
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "label": "Idées cadeaux",
+            "title": "Faites-vous plaisir sans vous ruiner",
+            "text": "Des idées pour toutes les occasions, à petits prix.",
+            "cta": "Découvrir",
+            "background": "sage-light"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "label": "Maison",
+            "title": "De belles découvertes, de petits prix",
+            "cta": "Découvrir",
+            "background": "ivory"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "label": "Saison",
+            "title": "Les pépites du moment",
+            "cta": "Découvrir",
+            "background": "gold"
+          }
+        }
+      },
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3"
+      ],
+      "settings": {
+        "eyebrow": "En ce moment",
+        "heading": "Les sélections <em>de saison</em>",
+        "heading_align": "left",
+        "layout": "feature",
+        "color_scheme": "offwhite",
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "Ne manquez plus <em>aucune pépite</em>",
+        "text": "<p>Recevez nos nouveautés et nos sélections du moment, directement dans votre boîte mail.</p>",
+        "button_label": "Je m'inscris",
+        "boxed": true,
+        "align": "split",
+        "color_scheme": "offwhite",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "categories",
+    "pepites",
+    "editorial",
+    "nouveautes",
+    "promotions",
+    "engagements",
+    "saison",
+    "newsletter"
+  ]
+}

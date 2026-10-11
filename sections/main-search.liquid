@@ -1,0 +1,106 @@
+{%- comment -%}
+  Résultats de recherche Shopify (produits, pages, articles), avec filtres et tri natifs.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign card_sizes = '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw'
+-%}
+<div class="page-header scheme-ivory">
+  <div class="page-width">
+    <p class="eyebrow">{{ 'search.title' | t }}</p>
+    <h1 class="page-header__title h2">
+      {%- if search.performed -%}
+        {{ 'search.results_for' | t: terms: search.terms }}
+      {%- else -%}
+        {{ 'search.heading' | t }}
+      {%- endif -%}
+    </h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form search-modal__form">
+      <div class="search-field">
+        <label for="SearchPage-Input" class="visually-hidden">{{ 'search.label' | t }}</label>
+        <span class="search-field__icon">{% render 'icon', name: 'search', size: 20 %}</span>
+        <input type="search" id="SearchPage-Input" class="field__input search-field__input" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" autocomplete="off">
+        <input type="hidden" name="options[prefix]" value="last">
+      </div>
+      <button type="submit" class="button">{{ 'search.submit' | t }}</button>
+    </form>
+  </div>
+</div>
+
+<section class="section scheme-offwhite" style="--pad-top: 32px; --pad-bottom: 72px;">
+  <div class="page-width">
+    {%- if search.performed -%}
+      {%- paginate search.results by s.per_page -%}
+        <div class="collection-layout{% if s.enable_filtering and search.filters.size > 0 %} collection-layout--sidebar{% endif %}">
+          {%- if search.results_count > 0 or search.filters.size > 0 -%}
+            {% render 'facets',
+              results: search,
+              section_id: section.id,
+              show_filters: s.enable_filtering,
+              show_sort: s.enable_sorting,
+              terms: search.terms,
+              count: search.results_count
+            %}
+          {%- endif -%}
+
+          <div class="collection-results" data-results="{{ section.id }}">
+            {%- if search.results_count > 0 -%}
+              {%- liquid
+                assign product_results = search.results | where: 'object_type', 'product'
+                assign other_results = search.results | where: 'object_type', 'page'
+                assign article_results = search.results | where: 'object_type', 'article'
+              -%}
+              {%- if product_results.size > 0 -%}
+                <ul class="grid grid--products" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: 3;">
+                  {%- for product in product_results -%}
+                    <li>{% render 'card-product', product: product, sizes: card_sizes, section_id: section.id, heading_tag: 'h2' %}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              {%- if other_results.size > 0 or article_results.size > 0 -%}
+                <div class="search-results__section" style="margin-top: 2.5rem;">
+                  <h2 class="h4">{{ 'search.pages_and_articles' | t }}</h2>
+                  <ul class="search-results__list" role="list">
+                    {%- for item in other_results -%}
+                      <li><a href="{{ item.url }}" class="search-result-link"><strong>{{ item.title | escape }}</strong><p>{{ item.content | strip_html | truncatewords: 24 }}</p></a></li>
+                    {%- endfor -%}
+                    {%- for item in article_results -%}
+                      <li><a href="{{ item.url }}" class="search-result-link"><strong>{{ item.title | escape }}</strong><p>{{ item.excerpt_or_content | strip_html | truncatewords: 24 }}</p></a></li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+              {% render 'pagination', paginate: paginate %}
+            {%- else -%}
+              <div class="empty-state">
+                {% render 'icon', name: 'search', size: 32 %}
+                <p class="h3">{{ 'search.no_results_title' | t }}</p>
+                <p>{{ 'search.no_results_text' | t: terms: search.terms }}</p>
+                <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'search.back_to_catalog' | t }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endpaginate -%}
+    {%- else -%}
+      <div class="empty-state">
+        {% render 'icon', name: 'sparkle', size: 32 %}
+        <p>{{ 'search.intro' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">{{ 'search.back_to_catalog' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "tag": "div",
+  "class": "section-main-search",
+  "settings": [
+    { "type": "range", "id": "per_page", "min": 12, "max": 48, "step": 4, "label": "Résultats par page", "default": 24 },
+    { "type": "checkbox", "id": "enable_filtering", "label": "Activer les filtres", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Activer le tri", "default": true }
+  ]
+}
+{% endschema %}

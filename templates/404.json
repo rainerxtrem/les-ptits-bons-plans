@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "En attendant",
+        "heading": "Quelques <em>pépites</em> à découvrir",
+        "filter": "available",
+        "products_to_show": 4,
+        "hide_if_empty": true,
+        "layout": "grid",
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "view_all_label": "Tout voir",
+        "view_all_position": "top",
+        "color_scheme": "offwhite",
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured"
+  ]
+}

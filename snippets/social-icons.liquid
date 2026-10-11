@@ -1,0 +1,34 @@
+{%- comment -%} Liens vers les réseaux sociaux renseignés dans les réglages du thème (aucun lien affiché s'il est vide). {%- endcomment -%}
+{%- liquid
+  assign networks = 'instagram,facebook,tiktok,pinterest,youtube,linkedin' | split: ','
+  assign has_any = false
+  for network in networks
+    assign key = 'social_' | append: network | append: '_link'
+    if settings[key] != blank
+      assign has_any = true
+    endif
+  endfor
+-%}
+{%- if has_any -%}
+  <ul class="social-icons" role="list">
+    {%- for network in networks -%}
+      {%- assign key = 'social_' | append: network | append: '_link' -%}
+      {%- if settings[key] != blank -%}
+        <li>
+          <a href="{{ settings[key] | escape }}" class="social-icons__link" target="_blank" rel="noopener">
+            {% render 'icon', name: network, size: 20 %}
+            {%- case network -%}
+              {%- when 'instagram' -%}{%- assign network_label = 'general.social.links.instagram' | t -%}
+              {%- when 'facebook' -%}{%- assign network_label = 'general.social.links.facebook' | t -%}
+              {%- when 'tiktok' -%}{%- assign network_label = 'general.social.links.tiktok' | t -%}
+              {%- when 'pinterest' -%}{%- assign network_label = 'general.social.links.pinterest' | t -%}
+              {%- when 'youtube' -%}{%- assign network_label = 'general.social.links.youtube' | t -%}
+              {%- else -%}{%- assign network_label = 'general.social.links.linkedin' | t -%}
+            {%- endcase -%}
+            <span class="visually-hidden">{{ network_label }} — {{ 'accessibility.link_opens_new_window' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

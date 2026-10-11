@@ -1,0 +1,74 @@
+{%- assign s = section.settings -%}
+<div class="page-header{% if s.align == 'center' %} page-header--center{% endif %} scheme-{{ s.header_scheme }}">
+  <div class="page-width page-width--{{ s.width }}">
+    {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+    <h1 class="page-header__title">{{ page.title | escape }}</h1>
+  </div>
+</div>
+{%- if page.content != blank -%}
+  <section class="section scheme-offwhite" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+    <div class="page-width page-width--{{ s.width }}">
+      <div class="rte prose{% if s.style == 'legal' %} prose--legal{% endif %}">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Contenu de la page",
+  "tag": "div",
+  "class": "section-main-page",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Le titre et le texte se modifient dans Boutique en ligne > Pages."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style du texte",
+      "options": [
+        { "value": "editorial", "label": "Éditorial" },
+        { "value": "legal", "label": "Document (pages légales)" }
+      ],
+      "default": "editorial"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Largeur",
+      "options": [
+        { "value": "narrow", "label": "Étroite" },
+        { "value": "medium", "label": "Moyenne" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement du titre",
+      "options": [
+        { "value": "left", "label": "À gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "header_scheme",
+      "label": "Couleurs de l'en-tête",
+      "options": [
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "offwhite", "label": "Blanc cassé" }
+      ],
+      "default": "ivory"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ]
+}
+{% endschema %}

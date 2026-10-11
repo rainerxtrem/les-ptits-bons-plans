@@ -1,0 +1,13 @@
+{%- comment -%}
+  Section technique utilisée uniquement par la Section Rendering API
+  pour rafraîchir le contenu du panier tiroir après une modification.
+{%- endcomment -%}
+{% render 'cart-contents', context: 'drawer' %}
+
+{% schema %}
+{
+  "name": "Panier tiroir",
+  "tag": "div",
+  "class": "cart-drawer-section"
+}
+{% endschema %}

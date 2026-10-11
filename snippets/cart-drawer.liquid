@@ -1,0 +1,20 @@
+{%- comment -%}
+  Panier tiroir (élément <dialog> natif : piège de focus, touche Échap et fond inerte gérés par le navigateur).
+  Son contenu est rafraîchi via la Section Rendering API (section « cart-drawer »).
+{%- endcomment -%}
+<cart-drawer>
+  <dialog class="drawer drawer--right" id="CartDrawer" aria-labelledby="CartDrawer-Title">
+    <div class="drawer__inner">
+      <div class="drawer__header">
+        <h2 class="drawer__title h4" id="CartDrawer-Title">
+          {{ 'cart.general.title' | t }}
+          <span class="drawer__count" data-cart-count>({{ cart.item_count }})</span>
+        </h2>
+        <button type="button" class="icon-button" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close', size: 22 %}</button>
+      </div>
+      <div class="drawer__body" id="CartDrawer-Contents" data-section-type="cart-drawer">
+        {% render 'cart-contents', context: 'drawer' %}
+      </div>
+    </div>
+  </dialog>
+</cart-drawer>

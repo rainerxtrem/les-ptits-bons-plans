@@ -1,0 +1,35 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Les pépites du moment sont arrivées — découvrez la sélection",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": ["announcement-1"],
+      "settings": {
+        "color_scheme": "sage",
+        "autoplay": false,
+        "autoplay_speed": 6
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "logo_position": "left",
+        "sticky": "scroll-up",
+        "color_scheme": "offwhite",
+        "show_search": true
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

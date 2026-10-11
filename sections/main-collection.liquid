@@ -1,0 +1,168 @@
+{%- comment -%}
+  Page collection : en-tête, filtres natifs Shopify, tri, grille paginée.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign banner_image = collection.image
+  if s.show_image == false
+    assign banner_image = nil
+  endif
+  assign card_sizes = '(min-width: 1200px) calc((100vw - 400px) / ' | append: s.columns_desktop | append: '), (min-width: 750px) 33vw, 50vw'
+-%}
+<div class="collection-hero scheme-{{ s.header_scheme }}{% if banner_image %} collection-hero--has-image{% endif %}">
+  <div class="page-width collection-hero__inner">
+    <div>
+      <nav class="breadcrumbs" aria-label="{{ 'general.breadcrumbs.label' | t }}">
+        <ol>
+          <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+          {%- if collection.handle != 'all' -%}
+            <li><a href="{{ routes.collections_url }}">{{ 'general.breadcrumbs.collections' | t }}</a></li>
+          {%- endif -%}
+          <li aria-current="page">{{ collection.title | escape }}</li>
+        </ol>
+      </nav>
+      {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+      <h1 class="collection-hero__title">{{ collection.title | escape }}</h1>
+      {%- if s.show_description and collection.description != blank -%}
+        <div class="collection-hero__desc rte">{{ collection.description }}</div>
+      {%- endif -%}
+      {%- if s.show_count -%}
+        <p class="collection-hero__count">{{ 'products.facets.product_count' | t: count: collection.all_products_count }}</p>
+      {%- endif -%}
+    </div>
+    {%- if banner_image -%}
+      <div class="collection-hero__media">
+        {% render 'responsive-image', image: banner_image, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400,600,800,1000,1300', priority: true, alt: '' %}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;" id="ProductGridSection-{{ section.id }}">
+  <div class="page-width">
+    {%- paginate collection.products by s.products_per_page -%}
+      <div class="collection-layout{% if s.filter_layout == 'sidebar' and s.enable_filtering and collection.filters.size > 0 %} collection-layout--sidebar{% endif %}">
+        {%- if s.enable_filtering or s.enable_sorting -%}
+          {% render 'facets',
+            results: collection,
+            section_id: section.id,
+            show_filters: s.enable_filtering,
+            show_sort: s.enable_sorting,
+            count: collection.products_count
+          %}
+        {%- endif -%}
+
+        <div class="collection-results" data-results="{{ section.id }}">
+          {%- if collection.products.size > 0 -%}
+            <ul class="grid grid--products" role="list" style="--cols-mobile: {{ s.columns_mobile }}; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }};">
+              {%- for product in collection.products -%}
+                {%- liquid
+                  assign lazy = true
+                  if forloop.index <= 4
+                    assign lazy = false
+                  endif
+                -%}
+                <li>{% render 'card-product', product: product, sizes: card_sizes, lazy: lazy, section_id: section.id, heading_tag: 'h2' %}</li>
+              {%- endfor -%}
+            </ul>
+            {% render 'pagination', paginate: paginate %}
+          {%- else -%}
+            <div class="empty-state">
+              {% render 'icon', name: 'search', size: 32 %}
+              {%- if collection.filters.size > 0 and collection.all_products_count > 0 -%}
+                <p class="h3">{{ 'products.facets.no_results_title' | t }}</p>
+                <p>{{ 'products.facets.no_results_text' | t }}</p>
+                <a href="{{ collection.url }}" class="button button--secondary">{{ 'products.facets.clear_all' | t }}</a>
+              {%- else -%}
+                <p class="h3">{{ 'collections.empty_title' | t }}</p>
+                <p>{{ 'collections.empty_text' | t }}</p>
+                <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection : produits",
+  "tag": "div",
+  "class": "section-main-collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "En-tête"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "checkbox", "id": "show_description", "label": "Afficher la description", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Afficher l'image de la collection", "default": true },
+    { "type": "checkbox", "id": "show_count", "label": "Afficher le nombre de produits", "default": true },
+    {
+      "type": "select",
+      "id": "header_scheme",
+      "label": "Couleurs de l'en-tête",
+      "options": [
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" },
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "sage", "label": "Vert sauge" }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Grille"
+    },
+    { "type": "range", "id": "products_per_page", "min": 8, "max": 48, "step": 4, "label": "Produits par page", "default": 24 },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Colonnes sur ordinateur", "default": 3 },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Colonnes sur mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Filtres et tri"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Activer les filtres",
+      "info": "Configurez les filtres (prix, disponibilité, type, marque, options…) dans l'application Shopify Search & Discovery.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "filter_layout",
+      "label": "Disposition des filtres sur ordinateur",
+      "options": [
+        { "value": "sidebar", "label": "Colonne latérale" },
+        { "value": "drawer", "label": "Panneau à ouvrir" }
+      ],
+      "default": "sidebar"
+    },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Activer le tri", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ]
+}
+{% endschema %}

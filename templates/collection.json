@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_description": true,
+        "show_image": true,
+        "show_count": true,
+        "header_scheme": "ivory",
+        "products_per_page": 24,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "enable_filtering": true,
+        "filter_layout": "sidebar",
+        "enable_sorting": true,
+        "color_scheme": "offwhite",
+        "padding_top": 32,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

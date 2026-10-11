@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor"
+        },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "inventory": {
+          "type": "inventory"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "style": "buttons"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": true,
+            "show_dynamic_checkout": true
+          }
+        },
+        "shipping": {
+          "type": "shipping_note",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Les modes et frais de livraison disponibles sont affichés à l'étape du paiement.</p>",
+            "show_policy_link": true
+          }
+        },
+        "description": {
+          "type": "description_tab",
+          "settings": {
+            "heading": "Description détaillée",
+            "open": true
+          }
+        },
+        "features": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Caractéristiques",
+            "icon": "sparkle",
+            "open": false
+          }
+        },
+        "usage": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Conseils d'utilisation",
+            "icon": "leaf",
+            "open": false
+          }
+        },
+        "delivery": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Livraison et retours",
+            "icon": "return",
+            "open": false
+          }
+        },
+        "sku": {
+          "type": "sku"
+        },
+        "share": {
+          "type": "share"
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "inventory",
+        "variant_picker",
+        "buy_buttons",
+        "shipping",
+        "description",
+        "features",
+        "usage",
+        "delivery",
+        "sku",
+        "share"
+      ],
+      "settings": {
+        "gallery_layout": "slider",
+        "gallery_ratio": "square",
+        "gallery_fit": "contain",
+        "enable_zoom": true,
+        "show_breadcrumbs": true,
+        "show_sticky_atc": true,
+        "color_scheme": "offwhite",
+        "padding_top": 24,
+        "padding_bottom": 64
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "source": "recommendations",
+        "intent": "related",
+        "eyebrow": "À découvrir aussi",
+        "heading": "Vous aimerez aussi",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "ivory",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recommendations"
+  ]
+}

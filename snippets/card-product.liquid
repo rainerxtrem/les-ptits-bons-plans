@@ -1,0 +1,77 @@
+{%- comment -%}
+  Carte produit réutilisable (grilles, carrousels, recherche, recommandations).
+
+  Paramètres :
+  - product (obligatoire)
+  - sizes : attribut sizes des images
+  - lazy : false pour les premières cartes visibles (défaut true)
+  - section_id : identifiant de section (unicité des formulaires)
+  - heading_tag : balise du titre (défaut h3)
+{%- endcomment -%}
+{%- liquid
+  assign card_sizes = sizes | default: '(min-width: 1200px) 300px, (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 48px) / 2)'
+  assign tag = heading_tag | default: 'h3'
+  assign media_count = product.media.size
+  assign primary = product.featured_media
+  assign secondary = nil
+  if settings.card_show_secondary_image and media_count > 1
+    assign secondary = product.media[1]
+  endif
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'QuickAdd-' | append: section_id | append: '-' | append: product.id
+-%}
+<article class="card-product{% if product.available == false %} card-product--soldout{% endif %}">
+  <div class="card-product__media{% if secondary %} card-product__media--hover{% endif %}">
+    <a href="{{ product.url }}" class="card-product__link-media" tabindex="-1" aria-hidden="true">
+      {%- if primary -%}
+        {%- liquid
+          assign card_priority = false
+          if lazy == false
+            assign card_priority = true
+          endif
+          assign primary_alt = primary.alt | default: product.title
+        -%}
+        {% render 'responsive-image', image: primary.preview_image, sizes: card_sizes, widths: '240,360,480,600,720,900', class: 'card-product__img', alt: primary_alt, priority: card_priority %}
+        {%- if secondary -%}
+          {% render 'responsive-image', image: secondary.preview_image, sizes: card_sizes, widths: '240,360,480,600,720,900', class: 'card-product__img card-product__img--secondary', alt: '' %}
+        {%- endif -%}
+      {%- else -%}
+        <span class="card-product__placeholder">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</span>
+      {%- endif -%}
+    </a>
+    {% render 'product-badges', product: product %}
+  </div>
+
+  <div class="card-product__info">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <p class="card-product__vendor">{{ product.vendor | escape }}</p>
+    {%- endif -%}
+    <{{ tag }} class="card-product__title">
+      <a href="{{ product.url }}" class="card-product__link">{{ product.title | escape }}</a>
+    </{{ tag }}>
+    {% render 'price', product: product %}
+  </div>
+
+  {%- if settings.card_show_quick_add -%}
+    <div class="card-product__actions">
+      {%- if product.available and product.has_only_default_variant and product.requires_selling_plan == false and variant.quantity_rule.min <= 1 -%}
+        <product-form class="product-form" data-section-id="{{ section_id }}">
+          {%- form 'product', product, id: form_id, class: 'card-product__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <button type="submit" name="add" class="button button--secondary button--small button--full">
+              <span class="button__label">{{ 'products.product.add_to_cart' | t }}</span>
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="visually-hidden">&nbsp;: {{ product.title | escape }}</span>
+            </button>
+            <p class="form-message form-message--error" role="alert" hidden></p>
+          {%- endform -%}
+        </product-form>
+      {%- elsif product.available -%}
+        <a href="{{ product.url }}" class="button button--secondary button--small button--full">
+          {{ 'products.product.choose_options' | t }}
+          <span class="visually-hidden">&nbsp;: {{ product.title | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</article>

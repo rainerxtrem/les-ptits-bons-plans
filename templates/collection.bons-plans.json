@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "eyebrow": "Offres du moment",
+        "show_description": true,
+        "show_image": true,
+        "show_count": true,
+        "header_scheme": "sage-light",
+        "products_per_page": 24,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "enable_filtering": true,
+        "filter_layout": "drawer",
+        "enable_sorting": true,
+        "color_scheme": "offwhite",
+        "padding_top": 32,
+        "padding_bottom": 72
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "Ne manquez plus <em>aucune pépite</em>",
+        "button_label": "Je m'inscris",
+        "boxed": true,
+        "align": "split",
+        "color_scheme": "offwhite",
+        "padding_top": 32,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

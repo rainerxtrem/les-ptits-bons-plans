@@ -1,0 +1,82 @@
+{%- assign s = section.settings -%}
+{%- if section.blocks.size > 0 -%}
+  <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+    <div class="page-width">
+      {% render 'section-heading', eyebrow: s.eyebrow, heading: s.heading, text: s.text, align: 'center' %}
+      <ul class="grid reveal" role="list" style="--cols-mobile: 2; --cols-tablet: 3; --cols-desktop: {{ s.columns_desktop }}; --ratio: {% if s.ratio == 'square' %}1 / 1{% else %}4 / 5{% endif %};">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image == blank and request.design_mode == false -%}{%- continue -%}{%- endif -%}
+          <li {{ block.shopify_attributes }}>
+            <figure class="category-card" style="margin: 0;">
+              <div class="category-card__media">
+                {%- if block.settings.image != blank -%}
+                  {% render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 25vw, 50vw', widths: '300,450,600,800' %}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              {%- if block.settings.caption != blank -%}
+                <figcaption class="category-card__body"><span class="category-card__text">{{ block.settings.caption | escape }}</span></figcaption>
+              {%- endif -%}
+            </figure>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Galerie d'images",
+  "tag": "div",
+  "class": "section-image-gallery",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Inspirations" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Quelques idées de coffrets" },
+    { "type": "richtext", "id": "text", "label": "Texte", "info": "Présentez uniquement des réalisations ou produits réellement proposés." },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Colonnes sur ordinateur", "default": 4 },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Format",
+      "options": [
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Carré" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" }
+      ],
+      "default": "offwhite"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Légende" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Galerie d'images",
+      "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }]
+    }
+  ]
+}
+{% endschema %}

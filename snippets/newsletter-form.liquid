@@ -1,0 +1,66 @@
+{%- comment -%}
+  Inscription à la newsletter via le formulaire client natif de Shopify
+  (le client est créé ou mis à jour avec l'acceptation du marketing par e-mail).
+  Aucune inscription n'est simulée : les messages proviennent de la réponse de Shopify.
+
+  Paramètres :
+  - form_id (obligatoire, unique dans la page)
+  - button_label
+  - consent_text : texte de consentement (richtext)
+{%- endcomment -%}
+{%- liquid
+  if button_label != blank
+    assign label = button_label
+  else
+    assign label = 'newsletter.button' | t
+  endif
+-%}
+{%- form 'customer', id: form_id, class: 'newsletter__form', novalidate: 'novalidate' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  {%- if form.posted_successfully? -%}
+    <p class="form-message form-message--success" role="status" tabindex="-1" id="{{ form_id }}-success" autofocus>
+      {% render 'icon', name: 'check', size: 18 %}
+      <span>{{ 'newsletter.success' | t }}</span>
+    </p>
+  {%- else -%}
+    {%- if form.errors -%}
+      <div class="form-message form-message--error" role="alert" id="{{ form_id }}-error">
+        {% render 'icon', name: 'alert', size: 18 %}
+        <span>
+          {%- if form.errors contains 'email' -%}
+            {{ 'newsletter.error_email' | t }}
+          {%- else -%}
+            {{ form.errors | default_errors }}
+          {%- endif -%}
+        </span>
+      </div>
+    {%- endif -%}
+    <div class="newsletter__fields">
+      <label for="{{ form_id }}-email" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+      <input
+        id="{{ form_id }}-email"
+        type="email"
+        name="contact[email]"
+        class="field__input"
+        value="{{ form.email }}"
+        autocomplete="email"
+        autocorrect="off"
+        autocapitalize="off"
+        required
+        placeholder="{{ 'newsletter.placeholder' | t }}"
+        {% if form.errors %}aria-invalid="true" aria-describedby="{{ form_id }}-error"{% else %}aria-describedby="{{ form_id }}-consent"{% endif %}
+      >
+      <button type="submit" class="button" name="commit">{{ label | escape }}</button>
+    </div>
+    <p class="newsletter__consent" id="{{ form_id }}-consent">
+      {%- if consent_text != blank -%}
+        {{ consent_text | strip_html }}
+      {%- else -%}
+        {{ 'newsletter.consent' | t }}
+      {%- endif -%}
+      {%- if shop.privacy_policy.body != blank %}
+        <a href="{{ shop.privacy_policy.url }}">{{ 'newsletter.privacy_link' | t }}</a>
+      {%- endif -%}
+    </p>
+  {%- endif -%}
+{%- endform -%}

@@ -1,0 +1,17 @@
+{%- comment -%}
+  En-tête de section éditorial : surtitre, titre, texte et lien facultatif.
+  Paramètres : eyebrow, heading, text (richtext), link_label, link_url, align ('left'|'center'), tag (défaut h2)
+{%- endcomment -%}
+{%- assign tag = tag | default: 'h2' -%}
+{%- if eyebrow != blank or heading != blank or text != blank -%}
+  <div class="section-heading section-heading--{{ align | default: 'left' }}">
+    <div class="section-heading__text">
+      {%- if eyebrow != blank -%}<p class="eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      {%- if heading != blank -%}<{{ tag }} class="section-heading__title h2">{{ heading }}</{{ tag }}>{%- endif -%}
+      {%- if text != blank -%}<div class="section-heading__desc rte">{{ text }}</div>{%- endif -%}
+    </div>
+    {%- if link_label != blank and link_url != blank -%}
+      <a href="{{ link_url }}" class="link-arrow">{{ link_label | escape }} {% render 'icon', name: 'arrow-right', size: 18 %}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

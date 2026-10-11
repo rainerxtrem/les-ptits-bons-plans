@@ -1,0 +1,68 @@
+<section class="section scheme-offwhite" style="--pad-top: 48px; --pad-bottom: 88px;">
+  <div class="page-width">
+    <p><a href="{{ routes.account_url }}" class="link-arrow">{{ 'customer.account.return' | t }}</a></p>
+    <h1 class="h2">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    {%- assign order_date = order.created_at | date: format: 'date' -%}
+    <p class="text-muted">{{ 'customer.order.date' | t: date: order_date }}</p>
+    {%- if order.cancelled -%}
+      <p class="form-message form-message--error">{%- assign cancel_date = order.cancelled_at | date: format: 'date' -%}{{ 'customer.order.cancelled' | t: date: cancel_date }}</p>
+    {%- endif -%}
+    <div class="account-grid" style="margin-top: 2rem;">
+      <div class="table-wrapper">
+        <table class="table table--responsive">
+          <thead>
+            <tr>
+              <th scope="col">{{ 'customer.order.product' | t }}</th>
+              <th scope="col">{{ 'customer.order.price' | t }}</th>
+              <th scope="col">{{ 'customer.order.quantity' | t }}</th>
+              <th scope="col">{{ 'customer.order.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for line_item in order.line_items -%}
+              <tr>
+                <td data-label="{{ 'customer.order.product' | t }}">
+                  {{ line_item.title | link_to: line_item.product.url }}
+                  {%- if line_item.fulfillment -%}
+                    <br><span class="small text-muted">{%- assign fulfil_date = line_item.fulfillment.created_at | date: format: 'date' -%}{{ 'customer.order.fulfilled_at' | t: date: fulfil_date }}
+                    {%- if line_item.fulfillment.tracking_url -%} — <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" rel="noopener">{{ 'customer.order.track' | t }}</a>{%- endif -%}</span>
+                  {%- endif -%}
+                </td>
+                <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.final_price | money }}</td>
+                <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+                <td data-label="{{ 'customer.order.total' | t }}">{{ line_item.final_line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+          <tfoot>
+            <tr><th scope="row" colspan="3">{{ 'customer.order.subtotal' | t }}</th><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+            {%- for discount in order.cart_level_discount_applications -%}
+              <tr><th scope="row" colspan="3">{{ discount.title | escape }}</th><td>−{{ discount.total_allocated_amount | money }}</td></tr>
+            {%- endfor -%}
+            {%- for shipping_method in order.shipping_methods -%}
+              <tr><th scope="row" colspan="3">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title | escape }})</th><td>{{ shipping_method.price | money }}</td></tr>
+            {%- endfor -%}
+            {%- for tax_line in order.tax_lines -%}
+              <tr><th scope="row" colspan="3">{{ tax_line.title }} ({{ tax_line.rate_percentage }} %)</th><td>{{ tax_line.price | money }}</td></tr>
+            {%- endfor -%}
+            <tr><th scope="row" colspan="3">{{ 'customer.order.total' | t }}</th><td><strong>{{ order.total_price | money_with_currency }}</strong></td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <aside class="contact-card">
+        <h2 class="h4">{{ 'customer.order.billing_address' | t }}</h2>
+        <p class="small">{{ 'customer.order.payment_status' | t }} : {{ order.financial_status_label }}</p>
+        <div class="small">{{ order.billing_address | format_address }}</div>
+        {%- if order.shipping_address -%}
+          <h2 class="h4" style="margin-top: 1.5rem;">{{ 'customer.order.shipping_address' | t }}</h2>
+          <p class="small">{{ 'customer.order.fulfillment_status' | t }} : {{ order.fulfillment_status_label }}</p>
+          <div class="small">{{ order.shipping_address | format_address }}</div>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Détail de commande", "tag": "div", "settings": [] }
+{% endschema %}

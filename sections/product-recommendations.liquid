@@ -1,0 +1,116 @@
+{%- comment -%}
+  Produits complémentaires.
+  Source « recommandations » : algorithme Shopify (et réglages de l'application Search & Discovery),
+  chargé en différé via /recommendations/products. Source « collection » : collection choisie.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign card_sizes = '(min-width: 990px) calc(100vw / ' | append: s.columns_desktop | append: '), (min-width: 750px) 33vw, 72vw'
+-%}
+{%- if s.source == 'collection' -%}
+  {%- if s.collection != blank and s.collection.products_count > 0 -%}
+    <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;">
+      <div class="page-width">
+        <slider-component class="slider-wrapper">
+          <div class="section-heading">
+            <div class="section-heading__text">
+              {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+              <h2 class="section-heading__title h2">{{ s.heading }}</h2>
+            </div>
+            <div class="slider-controls">
+              <button type="button" class="icon-button" data-slider-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', name: 'chevron-left', size: 20 %}</button>
+              <button type="button" class="icon-button" data-slider-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', name: 'chevron-right', size: 20 %}</button>
+            </div>
+          </div>
+          <ul class="slider" role="list" data-slider-track tabindex="0" aria-label="{{ s.heading | strip_html | escape }}" style="--cols-desktop: {{ s.columns_desktop }};">
+            {%- assign shown = 0 -%}
+            {%- for item in s.collection.products -%}
+              {%- if item.id != product.id and shown < s.products_to_show -%}
+                {%- assign shown = shown | plus: 1 -%}
+                <li>{% render 'card-product', product: item, sizes: card_sizes, section_id: section.id %}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </slider-component>
+      </div>
+    </section>
+  {%- endif -%}
+{%- else -%}
+  <section class="section scheme-{{ s.color_scheme }}" style="--pad-top: {{ s.padding_top }}px; --pad-bottom: {{ s.padding_bottom }}px;"{% unless recommendations.performed and recommendations.products_count > 0 %} hidden{% endunless %}>
+    <div class="page-width">
+      <product-recommendations data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ s.products_to_show }}&intent={{ s.intent }}">
+        {%- if recommendations.performed and recommendations.products_count > 0 -%}
+          <slider-component class="slider-wrapper">
+            <div class="section-heading">
+              <div class="section-heading__text">
+                {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+                <h2 class="section-heading__title h2">{{ s.heading }}</h2>
+              </div>
+              <div class="slider-controls">
+                <button type="button" class="icon-button" data-slider-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', name: 'chevron-left', size: 20 %}</button>
+                <button type="button" class="icon-button" data-slider-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', name: 'chevron-right', size: 20 %}</button>
+              </div>
+            </div>
+            <ul class="slider" role="list" data-slider-track tabindex="0" aria-label="{{ s.heading | strip_html | escape }}" style="--cols-desktop: {{ s.columns_desktop }};">
+              {%- for item in recommendations.products -%}
+                <li>{% render 'card-product', product: item, sizes: card_sizes, section_id: section.id %}</li>
+              {%- endfor -%}
+            </ul>
+          </slider-component>
+        {%- endif -%}
+      </product-recommendations>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Produits complémentaires",
+  "tag": "div",
+  "class": "section-product-recommendations",
+  "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Source",
+      "options": [
+        { "value": "recommendations", "label": "Recommandations Shopify" },
+        { "value": "collection", "label": "Collection choisie" }
+      ],
+      "default": "recommendations",
+      "info": "Les recommandations Shopify s'affinent avec l'historique des ventes et peuvent être personnalisées dans l'application Search & Discovery. La section est masquée s'il n'y a aucun produit."
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Type de recommandations",
+      "options": [
+        { "value": "related", "label": "Produits similaires" },
+        { "value": "complementary", "label": "Produits complémentaires (Search & Discovery)" }
+      ],
+      "default": "related"
+    },
+    { "type": "collection", "id": "collection", "label": "Collection (source « collection »)" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "À découvrir aussi" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Vous aimerez aussi" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 10, "step": 1, "label": "Nombre de produits", "default": 4 },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Colonnes sur ordinateur", "default": 4 },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Couleurs",
+      "options": [
+        { "value": "offwhite", "label": "Blanc cassé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "ivory", "label": "Beige ivoire" },
+        { "value": "sage-light", "label": "Vert sauge très clair" }
+      ],
+      "default": "ivory"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 64 }
+  ],
+  "presets": [{ "name": "Produits complémentaires" }],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

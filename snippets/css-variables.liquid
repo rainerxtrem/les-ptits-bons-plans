@@ -1,0 +1,84 @@
+{%- comment -%}
+  Jetons de design globaux issus des réglages du thème.
+  Toutes les couleurs, polices, largeurs et arrondis du thème passent par ces variables.
+{%- endcomment -%}
+<style>
+  {%- if settings.use_custom_fonts -%}
+    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+    {%- assign body_bold = settings.type_body_font | font_modify: 'weight', 'bold' -%}
+    {{ body_bold | font_face: font_display: 'swap' }}
+  {%- else -%}
+    @font-face {
+      font-family: 'DM Serif Display';
+      src: url('{{ 'dm-serif-display-400.woff2' | asset_url }}') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'DM Serif Display';
+      src: url('{{ 'dm-serif-display-400-italic.woff2' | asset_url }}') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('{{ 'inter-variable.woff2' | asset_url }}') format('woff2-variations'), url('{{ 'inter-variable.woff2' | asset_url }}') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  {%- endif -%}
+
+  :root {
+    --color-sage: {{ settings.color_sage }};
+    --color-sage-dark: {{ settings.color_sage_dark }};
+    --color-sage-light: {{ settings.color_sage_light }};
+    --color-gold: {{ settings.color_gold }};
+    --color-gold-text: {{ settings.color_gold_text }};
+    --color-ivory: {{ settings.color_ivory }};
+    --color-offwhite: {{ settings.color_offwhite }};
+    --color-white: #FFFFFF;
+    --color-text: {{ settings.color_text }};
+    --color-text-muted: {{ settings.color_text_muted }};
+    --color-border: {{ settings.color_border }};
+    --color-button: {{ settings.color_button }};
+    --color-button-text: {{ settings.color_button_text }};
+    --color-sale: {{ settings.color_sale }};
+    --color-success: {{ settings.color_success }};
+    --color-footer: {{ settings.color_footer }};
+    --color-sage-rgb: {{ settings.color_sage.red }}, {{ settings.color_sage.green }}, {{ settings.color_sage.blue }};
+    --color-text-rgb: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+
+    {%- if settings.use_custom_fonts %}
+      --font-heading: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+      --font-heading-weight: {{ settings.type_heading_font.weight }};
+      --font-heading-style: {{ settings.type_heading_font.style }};
+      --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    {%- else %}
+      --font-heading: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+      --font-heading-weight: 400;
+      --font-heading-style: normal;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    {%- endif %}
+    --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+
+    --page-width: {{ settings.page_width | append: 'px' }};
+    --radius: {{ settings.radius | append: 'px' }};
+    --radius-sm: {{ settings.radius | divided_by: 2 | append: 'px' }};
+    --button-radius: {{ settings.button_radius | append: 'px' }};
+    --logo-width: {{ settings.logo_width | append: 'px' }};
+    --logo-width-mobile: {{ settings.logo_width_mobile | append: 'px' }};
+
+    {%- case settings.card_image_ratio -%}
+      {%- when 'square' -%}{%- assign card_ratio = '1 / 1' -%}
+      {%- when 'landscape' -%}{%- assign card_ratio = '4 / 3' -%}
+      {%- else -%}{%- assign card_ratio = '4 / 5' -%}
+    {%- endcase %}
+    --card-ratio: {{ card_ratio }};
+    --card-fit: {{ settings.card_image_fit }};
+  }
+</style>

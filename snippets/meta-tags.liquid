@@ -1,0 +1,81 @@
+{%- comment -%}
+  Balises Open Graph / Twitter et données structurées d'organisation.
+  Les données produit structurées sont générées dans la section main-product à partir des données Shopify réelles.
+{%- endcomment -%}
+{%- liquid
+  assign og_title = page_title | default: shop.name
+  assign og_url = canonical_url | default: request.origin
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: shop.name
+
+  if request.page_type == 'product'
+    assign og_type = 'product'
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+  elsif request.page_type == 'password'
+    assign og_url = request.origin
+  endif
+
+  assign og_image = page_image | default: settings.share_image
+-%}
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | escape }}">
+<meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
+{%- if og_image -%}
+  <meta property="og:image" content="https:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="{{ 1200 | divided_by: og_image.aspect_ratio | round }}">
+  {%- if og_image.alt != blank -%}<meta property="og:image:alt" content="{{ og_image.alt | escape }}">{%- endif -%}
+{%- endif -%}
+{%- if request.page_type == 'product' -%}
+  <meta property="product:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}">
+  <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- if request.page_type == 'index' -%}
+  {%- liquid
+    assign same_as = ''
+    assign social_keys = 'instagram,facebook,tiktok,pinterest,youtube,linkedin' | split: ','
+    for key in social_keys
+      assign setting_key = 'social_' | append: key | append: '_link'
+      if settings[setting_key] != blank
+        assign same_as = same_as | append: settings[setting_key] | append: '|||'
+      endif
+    endfor
+    assign same_as_list = same_as | split: '|||'
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | append: routes.root_url | json }}
+      {%- if settings.logo %},
+      "logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }}
+      {%- endif -%}
+      {%- if same_as_list.size > 0 %},
+      "sameAs": {{ same_as_list | json }}
+      {%- endif %}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | append: routes.root_url | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}

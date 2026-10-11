@@ -1,0 +1,21 @@
+name: Theme Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Installer Shopify CLI
+        run: npm install -g @shopify/cli@3
+      - name: Valider le thème (Liquid, schémas JSON, traductions)
+        run: shopify theme check --path . --fail-level error
+      - name: Vérifier la syntaxe JavaScript
+        run: node --check assets/theme.js
